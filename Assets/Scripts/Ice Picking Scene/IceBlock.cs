@@ -53,4 +53,9 @@ public class IceBlock : MonoBehaviour
                 break;
         }
     }
+
+    private void OnValidate()
+    {
+        SetSpikes();
+    }
 }
