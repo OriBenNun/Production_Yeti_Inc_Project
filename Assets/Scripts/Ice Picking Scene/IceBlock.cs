@@ -1,8 +1,8 @@
 using UnityEngine;
+using Pool_System;
 
 
-
-public class IceBlock : MonoBehaviour
+public class IceBlock : PoolGameObject
 {
     public enum IceBlockVariation
     {
@@ -15,18 +15,21 @@ public class IceBlock : MonoBehaviour
     [SerializeField] private GameObject _rightSpike;
     [field: SerializeField] public IceBlockVariation Variation { get; private set; }
 
-    public void Init(IceBlockVariation variation)
+    public void Init(Vector3 position, IceBlockVariation variation)
     {
+        transform.position = position;
         Variation = variation;
         SetSpikes();
+
+        gameObject.SetActive(true);
     }
 
-
-    public void Clean()
+    public override void ResetSelf()
     {
+        base.ResetSelf();
+
         Variation = IceBlockVariation.NoSpike;
     }
-
 
     private void SetSpikes()
     {
@@ -54,8 +57,4 @@ public class IceBlock : MonoBehaviour
         }
     }
 
-    private void OnValidate()
-    {
-        SetSpikes();
-    }
 }

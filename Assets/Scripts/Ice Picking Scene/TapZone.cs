@@ -8,7 +8,7 @@ public class TapZone : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        _icePickingManager.Chop(_side);
+        _icePickingManager.ChopAction(_side);
         Debug.Log($"Tapped {_side} side");
     }
 }
