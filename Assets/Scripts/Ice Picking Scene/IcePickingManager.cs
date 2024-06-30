@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static IceBlock;
@@ -11,6 +12,10 @@ public enum Sides
 
 public class IcePickingManager : MonoBehaviour
 {
+    public event Action<IceBlock> OnPlayerHit;
+
+
+
     [SerializeField] private IcePickingPlayer _player;
     [SerializeField] private IceBlockPool _iceBlockPool;
 
@@ -39,10 +44,20 @@ public class IcePickingManager : MonoBehaviour
         // Particle Effect
 
         // Check if hit by spike (check if the next block has a spike on current side
+        IceBlockVariation variation = _icePillarQueue.Peek().Variation;
+        bool rightHit = (side == Sides.Right) && (variation == IceBlockVariation.RightSpike);
+        bool leftHit = (side == Sides.Left) && (variation == IceBlockVariation.LeftSpike);
+        if (rightHit || leftHit)
+            PlayerHit();
 
     }
 
-    
+    private void PlayerHit()
+    {
+        OnPlayerHit?.Invoke(_icePillarQueue.Peek());
+
+        Debug.Log("Player Got Hit");
+    }
     private void InitPillar()
     {
         _icePillarQueue = new Queue<IceBlock>();
@@ -83,7 +98,7 @@ public class IcePickingManager : MonoBehaviour
     }
     private IceBlockVariation DetermineSpikeVariation()
     {
-        return (IceBlockVariation)Random.Range(0, 3);
+        return (IceBlockVariation)UnityEngine.Random.Range(0, 3);
     }
    
 
