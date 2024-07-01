@@ -636,6 +636,9 @@ MonoBehaviour:
   _startingSide: 1
   _pillarBasePoint: {fileID: 1591065459}
   _blockHeight: 1
+  _maxSpaceBetweenSpikes: 3
+  _maxSpikesBeforeSwitch: 3
+  _firstSpikeHeight: 4
 --- !u!1 &1183995802
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,7 +732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8ba0e53e5792b748aeba9c228a43430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <InitialPoolSize>k__BackingField: 20
+  <InitialPoolSize>k__BackingField: 15
   _iceBlockPrefab: {fileID: 9192292891566466238, guid: 7d726cf4a09803d4192baa453887e17a, type: 3}
   _parentTransform: {fileID: 1591065459}
 --- !u!4 &1591065459

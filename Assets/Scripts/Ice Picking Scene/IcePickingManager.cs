@@ -24,12 +24,23 @@ public class IcePickingManager : MonoBehaviour
     [SerializeField] private Transform _pillarBasePoint;
     [SerializeField] private float _blockHeight;
 
+    [Header("Pillar Generation Settings")]
+    [SerializeField] private int _maxSpaceBetweenSpikes;
+    [SerializeField] private int _maxSpikesBeforeSwitch;
+    [SerializeField] private int _firstSpikeHeight = 4;
+
+
+
+    private System.Random _random;
+    private int _blocksSinceLastSpike;
+    private int _spikesSinceLastSwap;
+    private Sides _currentSpikeSide;
     private Queue<IceBlock> _icePillarQueue;
     public void Init()
     {
         _iceBlockPool.Init();
         _player.SetCurrentSide(_startingSide);
-
+        _random = new System.Random();
         InitPillar();
     }
 
@@ -60,9 +71,13 @@ public class IcePickingManager : MonoBehaviour
     }
     private void InitPillar()
     {
+        _blocksSinceLastSpike = _firstSpikeHeight - 1;
+        _spikesSinceLastSwap = 0;
+        _currentSpikeSide = UnityEngine.Random.Range(0,2) == 0 ? Sides.Left : Sides.Right;
+
         _icePillarQueue = new Queue<IceBlock>();
 
-        for(int i = 0; i < _iceBlockPool.InitialPoolSize - 5; i++)
+        for(int i = 0; i < _iceBlockPool.InitialPoolSize; i++)
         {
             AddIceBlock();
         }
@@ -98,7 +113,40 @@ public class IcePickingManager : MonoBehaviour
     }
     private IceBlockVariation DetermineSpikeVariation()
     {
-        return (IceBlockVariation)UnityEngine.Random.Range(0, 3);
+        // The first X blocks have no spikes.
+        if (_icePillarQueue.Count < _firstSpikeHeight)
+            return IceBlockVariation.NoSpike;
+
+        // Check if need to make a spike. 
+        double chanceForSpike = (1f / (_maxSpaceBetweenSpikes - 1f)) * _blocksSinceLastSpike;
+        double rollForSpike = _random.NextDouble();
+        
+        if (chanceForSpike <= rollForSpike)
+        {
+            _blocksSinceLastSpike++;
+            return IceBlockVariation.NoSpike;
+        }
+
+        _blocksSinceLastSpike = 0;
+
+        // Check if spikes need to switch side.
+        double chanceForSwitch = (1f / _maxSpikesBeforeSwitch) * _spikesSinceLastSwap;
+        double rollForSwap = _random.NextDouble();
+
+        if (chanceForSwitch <= rollForSwap)
+        {
+            _spikesSinceLastSwap++;
+        }
+        else
+        {
+            _currentSpikeSide = _currentSpikeSide == Sides.Left ? Sides.Right : Sides.Left;
+            _spikesSinceLastSwap = 1;
+        }
+
+        if (_currentSpikeSide == Sides.Left)
+            return IceBlockVariation.LeftSpike;
+        else
+            return IceBlockVariation.RightSpike;
     }
    
 
