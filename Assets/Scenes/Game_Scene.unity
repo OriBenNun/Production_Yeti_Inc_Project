@@ -118,6 +118,74 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &244422681
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2863989175830632538, guid: 6f4eef53f7c40c5418f6b039b51a8482, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2863989175830632538, guid: 6f4eef53f7c40c5418f6b039b51a8482, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2863989175830632538, guid: 6f4eef53f7c40c5418f6b039b51a8482, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2863989175830632538, guid: 6f4eef53f7c40c5418f6b039b51a8482, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2863989175830632538, guid: 6f4eef53f7c40c5418f6b039b51a8482, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2863989175830632538, guid: 6f4eef53f7c40c5418f6b039b51a8482, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2863989175830632538, guid: 6f4eef53f7c40c5418f6b039b51a8482, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2863989175830632538, guid: 6f4eef53f7c40c5418f6b039b51a8482, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2863989175830632538, guid: 6f4eef53f7c40c5418f6b039b51a8482, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2863989175830632538, guid: 6f4eef53f7c40c5418f6b039b51a8482, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7008139517876468164, guid: 6f4eef53f7c40c5418f6b039b51a8482, type: 3}
+      propertyPath: m_Name
+      value: Water_Player
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6f4eef53f7c40c5418f6b039b51a8482, type: 3}
+--- !u!114 &244422682 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6456734978686653492, guid: 6f4eef53f7c40c5418f6b039b51a8482, type: 3}
+  m_PrefabInstance: {fileID: 244422681}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2437c368a9be8124d8509bc85f24b117, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,6 +437,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 9127254356682311613, guid: 90b619d4bbb77584ab105fa2e157b8ef, type: 3}
   m_PrefabInstance: {fileID: 936896208}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &936896210 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6501074546943569323, guid: 90b619d4bbb77584ab105fa2e157b8ef, type: 3}
+  m_PrefabInstance: {fileID: 936896208}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd158b6cc6812794cb4dcbad0b0458ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &982997553
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -495,6 +574,7 @@ GameObject:
   - component: {fileID: 1095114996}
   - component: {fileID: 1095114995}
   - component: {fileID: 1095114994}
+  - component: {fileID: 1095114998}
   m_Layer: 0
   m_Name: WaterArea_Canvas_Parent
   m_TagString: Untagged
@@ -560,6 +640,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58c110fb85ddc9d4c9bb8bbb2140d622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waterPlayer: {fileID: 244422682}
+  startLane: {fileID: 936896210}
 --- !u!224 &1095114997
 RectTransform:
   m_ObjectHideFlags: 0
@@ -580,6 +662,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1095114998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095114993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &1644295056
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,3 +943,4 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 1705406287}
   - {fileID: 1095114997}
+  - {fileID: 244422681}
