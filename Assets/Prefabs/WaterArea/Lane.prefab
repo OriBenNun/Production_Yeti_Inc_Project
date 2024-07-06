@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9127254356682311613}
   - component: {fileID: 1820714484426900510}
+  - component: {fileID: 6501074546943569323}
   - component: {fileID: 8901182162548668582}
   m_Layer: 0
   m_Name: Lane
@@ -45,6 +46,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7569154830531980614}
   m_CullTransparentMesh: 1
+--- !u!114 &6501074546943569323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7569154830531980614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd158b6cc6812794cb4dcbad0b0458ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8901182162548668582
 MonoBehaviour:
   m_ObjectHideFlags: 0
