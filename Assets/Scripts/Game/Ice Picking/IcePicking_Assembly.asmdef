@@ -1,0 +1,16 @@
+{
+    "name": "IcePicking_Assembly",
+    "rootNamespace": "",
+    "references": [
+        "GUID:56f0ea81ac01e5143adc6f452551b0bb"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
