@@ -30,9 +30,7 @@ namespace Game.Water_Area
 
         private void UpdateCurrentLaneAndMovePlayer(LaneManager lane)
         {
-            Debug.Log($"Swiped to lane: {lane.name}");
             _currentLane = lane;
-            
             MovePlayerToCurrentLane();
         }
 
