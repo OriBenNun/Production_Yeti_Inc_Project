@@ -1,30 +1,36 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
 namespace Game.Water_Area
 {
-    public class WaterAreaCharacterController : MonoBehaviour
+    public class WaterAreaCharacterController : MonoBehaviour, IBeginDragHandler, IDragHandler
     {
         [FormerlySerializedAs("player")] [SerializeField] private WaterPlayer waterPlayer;
-        [SerializeField] private LaneManager startLane;
+        [SerializeField] private List<LaneManager> lanes;
+        [SerializeField] private Transform startingPosition;
+        [SerializeField] private float swipeDetectionSensitivity = 1f;
         
         private LaneManager _currentLane;
-        
-        private void Awake()
-        {
-            LaneManager.OnLaneClicked += HandleOnLaneClicked;
-            _currentLane = startLane;
-        }
+        private Vector2 _touchStartPosition;
+        private bool _isDragging;
 
         private void Start()
         {
-            MovePlayerToCurrentLane();
+            _currentLane = lanes[1];
+            MovePlayerToStartingPosition();
         }
 
-        private void HandleOnLaneClicked(LaneManager lane)
+        private void MovePlayerToStartingPosition()
         {
-            Debug.Log($"Clicked on lane: {lane.name}");
+            waterPlayer.MoveToPosition(startingPosition.position);
+        }
+
+        private void UpdateCurrentLaneAndMovePlayer(LaneManager lane)
+        {
+            Debug.Log($"Swiped to lane: {lane.name}");
             _currentLane = lane;
             
             MovePlayerToCurrentLane();
@@ -34,5 +40,50 @@ namespace Game.Water_Area
         {
             waterPlayer.MoveToLane(_currentLane);
         }
+
+        public void OnBeginDrag(PointerEventData eventData)
+        {
+            _touchStartPosition = eventData.position;
+            _isDragging = true;
+        }
+
+        public void OnDrag(PointerEventData eventData)
+        {
+            if (!_isDragging)
+            {
+                _touchStartPosition = eventData.position;
+                _isDragging = true;
+            }
+            
+            var touchPosition = eventData.position;
+            var swipeDistance = touchPosition - _touchStartPosition;
+
+            if (swipeDistance.magnitude > swipeDetectionSensitivity)
+            {
+                var swipeDirection = swipeDistance.x > 0 ? SwipeDirection.Right : SwipeDirection.Left;
+                var lane = GetLaneBySwipeDirection(swipeDirection);
+                UpdateCurrentLaneAndMovePlayer(lane);
+                _isDragging = false;
+            }
+        }
+
+        private LaneManager GetLaneBySwipeDirection(SwipeDirection swipeDirection)
+        {
+            var currentLaneIndex = lanes.IndexOf(_currentLane);
+            var nextLaneIndex = swipeDirection == SwipeDirection.Left ? currentLaneIndex - 1 : currentLaneIndex + 1;
+
+            if (nextLaneIndex < 0 || nextLaneIndex >= lanes.Count)
+            {
+                return _currentLane;
+            }
+            
+            return lanes[nextLaneIndex];
+        }
+    }
+    
+    public enum SwipeDirection
+    {
+        Left,
+        Right
     }
 }
