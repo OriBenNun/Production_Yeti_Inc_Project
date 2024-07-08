@@ -8,7 +8,6 @@ namespace Pool_System
         [SerializeField] private bool resetTransformOnClean = true;
         public event Action<PoolGameObject> OnObjectCanBeCleaned;
         
-        // ReSharper disable Unity.PerformanceAnalysis
         public virtual void ResetSelf()
         {
             if (!resetTransformOnClean) return;

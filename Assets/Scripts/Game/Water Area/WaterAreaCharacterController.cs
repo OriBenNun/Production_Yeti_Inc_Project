@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 namespace Game.Water_Area
 {
@@ -21,24 +22,6 @@ namespace Game.Water_Area
         {
             _currentLane = lanes[1];
             MovePlayerToStartingPosition();
-        }
-
-        private void MovePlayerToStartingPosition()
-        {
-            waterPlayer.MoveToPosition(startingPosition.position);
-        }
-
-        private void UpdateCurrentLaneAndMovePlayer(LaneManager lane)
-        {
-            Debug.Log($"Swiped to lane: {lane.name}");
-            _currentLane = lane;
-            
-            MovePlayerToCurrentLane();
-        }
-
-        private void MovePlayerToCurrentLane()
-        {
-            waterPlayer.MoveToLane(_currentLane);
         }
 
         public void OnBeginDrag(PointerEventData eventData)
@@ -65,6 +48,30 @@ namespace Game.Water_Area
                 UpdateCurrentLaneAndMovePlayer(lane);
                 _isDragging = false;
             }
+        }
+        
+        public List<LaneManager> GetLanes() => lanes;
+        
+        public LaneManager GetRandomLane()
+        {
+            var randomIndex = Random.Range(0, lanes.Count);
+            return lanes[randomIndex];
+        }
+        
+        private void MovePlayerToStartingPosition()
+        {
+            waterPlayer.MoveToPosition(startingPosition.position);
+        }
+
+        private void UpdateCurrentLaneAndMovePlayer(LaneManager lane)
+        {
+            _currentLane = lane;
+            MovePlayerToCurrentLane();
+        }
+
+        private void MovePlayerToCurrentLane()
+        {
+            waterPlayer.MoveToLane(_currentLane);
         }
 
         private LaneManager GetLaneBySwipeDirection(SwipeDirection swipeDirection)
