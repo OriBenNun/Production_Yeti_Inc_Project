@@ -7,6 +7,6 @@ public class IcePickingStarter : MonoBehaviour
 
     private void Start()
     {
-        _manager.Init();
+        _manager.Init(1);
     }
 }
