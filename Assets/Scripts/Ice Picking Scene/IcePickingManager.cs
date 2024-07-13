@@ -17,6 +17,10 @@ public class IcePickingManager : MonoBehaviour
     public event Action<IceBlock, bool> OnPlayerHit;
     public event Action OnPlayerStart;
     public event Action OnChop;
+    /// <summary>
+    /// Recieves the number of ice blocks chopped, the amount of defense left
+    /// </summary>
+    public event Action<int, int> OnFinishMinigame;
 
     [SerializeField] private IcePickingPlayer _player;
     [SerializeField] private IceBlockPool _iceBlockPool;
@@ -45,14 +49,15 @@ public class IcePickingManager : MonoBehaviour
     private Queue<IceBlock> _icePillarQueue;
     private bool _hasStarted = false;
 
-    private int _defense;
     private float _timer;
     private bool _isGraceTime;
     public int IceChopped { get; private set; }
+    public int Defense { get; private set; }
+
 
     public void Init(int defense)
     {
-        _defense = defense;
+        Defense = defense;
         
         _random = new System.Random();
         _timer = _maxTime;
@@ -112,10 +117,10 @@ public class IcePickingManager : MonoBehaviour
     {
         Debug.Log("Player Got Hit");
 
-        if (_defense > 0)
+        if (Defense > 0)
         {
+            Defense--;
             OnPlayerHit?.Invoke(_icePillarQueue.Peek(), false);
-            _defense--;
         }
         else
         {
