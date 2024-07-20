@@ -2,7 +2,8 @@
     "name": "IcePicking_Assembly",
     "rootNamespace": "",
     "references": [
-        "GUID:56f0ea81ac01e5143adc6f452551b0bb"
+        "GUID:56f0ea81ac01e5143adc6f452551b0bb",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
