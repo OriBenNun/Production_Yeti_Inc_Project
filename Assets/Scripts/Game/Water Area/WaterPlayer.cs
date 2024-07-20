@@ -5,15 +5,30 @@ namespace Game.Water_Area
 {
     public class WaterPlayer : MonoBehaviour
     {
-        public static event Action OnPlayerGotHit;
+        [SerializeField] private int startingLives = 5;
+        
+        public static event Action<int> OnPlayerGotHit;
+        public static event Action OnPlayerDied;
+        
+        private int _currentLives;
+
+        private void Awake()
+        {
+            _currentLives = startingLives;
+        }
+
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Obstacle"))
-            {
-                var obstacle = other.GetComponent<Obstacle>();
-                OnPlayerGotHit?.Invoke();
-                Debug.Log($"Got hit a obstacle: {obstacle.name}");
-            }
+            if (!other.CompareTag("Obstacle")) return;
+            
+            // var obstacle = other.GetComponent<Obstacle>();
+            _currentLives--;
+            OnPlayerGotHit?.Invoke(_currentLives);
+
+            if (_currentLives != 0) return;
+            
+            gameObject.SetActive(false);
+            OnPlayerDied?.Invoke();
         }
 
         public void MoveToLane(LaneManager currentLane)
