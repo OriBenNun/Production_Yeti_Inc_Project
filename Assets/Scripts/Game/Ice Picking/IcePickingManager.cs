@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static IceBlock;
 
 
@@ -12,12 +14,18 @@ public enum Sides
 
 public class IcePickingManager : MonoBehaviour
 {
-    public event Action<IceBlock> OnPlayerHit;
-
-
+    public event Action<IceBlock, bool> OnPlayerHit;
+    public event Action OnPlayerStart;
+    public event Action OnChop;
+    /// <summary>
+    /// Recieves the number of ice blocks chopped, the amount of defense left
+    /// </summary>
+    public event Action<int, int> OnFinishMinigame;
 
     [SerializeField] private IcePickingPlayer _player;
     [SerializeField] private IceBlockPool _iceBlockPool;
+    [SerializeField] private Image _timerFillImage;
+
 
     [Header("Settings")]
     [SerializeField] private Sides _startingSide;
@@ -29,28 +37,60 @@ public class IcePickingManager : MonoBehaviour
     [SerializeField] private int _maxSpikesBeforeSwitch;
     [SerializeField] private int _firstSpikeHeight = 4;
 
-
+    [Header("Timer Settings")]
+    [SerializeField] private float _maxTime;
+    [SerializeField] private float _percentTimeRecovered;
+    [SerializeField] private float _gracePeriodDuration;
 
     private System.Random _random;
     private int _blocksSinceLastSpike;
     private int _spikesSinceLastSwap;
     private Sides _currentSpikeSide;
     private Queue<IceBlock> _icePillarQueue;
-    public void Init()
+    private bool _hasStarted = false;
+
+    private float _timer;
+    private bool _isGraceTime;
+    public int IceChopped { get; private set; }
+    public int Defense { get; private set; }
+
+
+    public void Init(int defense)
     {
+        Defense = defense;
+        
+        _random = new System.Random();
+        _timer = _maxTime;
+        _timerFillImage.fillAmount = 1f;
+        _isGraceTime = false;
+        IceChopped = 0;
+
+        _blocksSinceLastSpike = 0;
+        _spikesSinceLastSwap = 0;
+        _icePillarQueue = new Queue<IceBlock>();
+
         _iceBlockPool.Init();
         _player.SetCurrentSide(_startingSide);
-        _random = new System.Random();
         InitPillar();
+
     }
 
     public void ChopAction(Sides side)
     {
+        if (!_hasStarted)
+        {
+            _hasStarted = true;
+            OnPlayerStart?.Invoke();
+            StartCoroutine(TimerTick());
+        }
+
         // Move the character to the chop side,
         _player.SetCurrentSide(side);
 
         // ChopAction Pillar
         ChopPillar();
+        IceChopped += 1;
+
 
         // Particle Effect
 
@@ -61,13 +101,34 @@ public class IcePickingManager : MonoBehaviour
         if (rightHit || leftHit)
             PlayerHit();
 
+       
+        // Timer Handling
+        _isGraceTime = true;
+        _timer += _maxTime * (_percentTimeRecovered / 100f);
+        if( _timer  > _maxTime )
+            _timer = _maxTime;
+
+      
+
+        OnChop?.Invoke();
     }
 
     private void PlayerHit()
     {
-        OnPlayerHit?.Invoke(_icePillarQueue.Peek());
-
         Debug.Log("Player Got Hit");
+
+        if (Defense > 0)
+        {
+            Defense--;
+            OnPlayerHit?.Invoke(_icePillarQueue.Peek(), false);
+        }
+        else
+        {
+            OnPlayerHit?.Invoke(_icePillarQueue.Peek(), true);
+            Debug.Log("Player Knocked Out");
+        }
+
+
     }
     private void InitPillar()
     {
@@ -99,6 +160,8 @@ public class IcePickingManager : MonoBehaviour
         // Dequeue and disable the block chopped.
         IceBlock blockChopped = _icePillarQueue.Dequeue();
         blockChopped.gameObject.SetActive(false);
+
+
 
         // Lower Pillar
         foreach(var block in _icePillarQueue)
@@ -149,7 +212,31 @@ public class IcePickingManager : MonoBehaviour
             return IceBlockVariation.RightSpike;
     }
    
+    private IEnumerator TimerTick()
+    {
+        while(_timer > 0)
+        {
+            if (_isGraceTime)
+            {
+                yield return new WaitForSeconds(_gracePeriodDuration);
+                _isGraceTime = false;
+            }
+            else
+            {
+                yield return null;
 
+                _timer -= Time.deltaTime;
+
+                if (_timer < 0)
+                    _timer = 0;
+
+                _timerFillImage.fillAmount = _timer / _maxTime;
+
+            }
+        }
+
+
+    }
 
 
 }
