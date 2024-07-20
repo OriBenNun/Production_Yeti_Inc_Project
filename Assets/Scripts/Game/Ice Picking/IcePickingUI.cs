@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,7 +15,7 @@ public class IcePickingUI : MonoBehaviour
     {
         _manager.OnChop += UpdateOnChop;
         _manager.OnPlayerStart += OnFirstInput;
-        _manager.OnPlayerHit += OnHit;
+        _manager.OnPlayerGotHit += OnGotHit;
         _iceCounter.text = string.Empty;
         _tapPrompt.gameObject.SetActive(true);
 
@@ -26,7 +27,7 @@ public class IcePickingUI : MonoBehaviour
     {
         _manager.OnChop -= UpdateOnChop;
         _manager.OnPlayerStart -= OnFirstInput;
-
+        _manager.OnPlayerGotHit -= OnGotHit;
     }
 
     private void UpdateOnChop()
@@ -40,7 +41,7 @@ public class IcePickingUI : MonoBehaviour
         _tapPrompt.gameObject.SetActive(false);
     }
 
-    private void OnHit(IceBlock blockHit, bool isFatal)
+    private void OnGotHit(IceBlock blockHit, bool isFatal)
     {
         if (_manager.Defense <= 0)
             _helmetImage.gameObject.SetActive(false);

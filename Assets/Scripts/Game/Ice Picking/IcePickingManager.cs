@@ -14,14 +14,11 @@ public enum Sides
 
 public class IcePickingManager : MonoBehaviour
 {
-    public event Action<IceBlock, bool> OnPlayerHit;
+    public event Action<IceBlock, bool> OnPlayerGotHit;
+    public event Action OnTimerEnd;
     public event Action OnPlayerStart;
     public event Action OnChop;
-    /// <summary>
-    /// Recieves the number of ice blocks chopped, the amount of defense left
-    /// </summary>
-    public event Action<int, int> OnFinishMinigame;
-
+    
     [SerializeField] private IcePickingPlayer _player;
     [SerializeField] private IceBlockPool _iceBlockPool;
     [SerializeField] private Image _timerFillImage;
@@ -120,14 +117,13 @@ public class IcePickingManager : MonoBehaviour
         if (Defense > 0)
         {
             Defense--;
-            OnPlayerHit?.Invoke(_icePillarQueue.Peek(), false);
+            OnPlayerGotHit?.Invoke(_icePillarQueue.Peek(), false);
         }
         else
         {
-            OnPlayerHit?.Invoke(_icePillarQueue.Peek(), true);
-            Debug.Log("Player Knocked Out");
+            OnPlayerGotHit?.Invoke(_icePillarQueue.Peek(), true);
+            
         }
-
 
     }
     private void InitPillar()
@@ -228,8 +224,11 @@ public class IcePickingManager : MonoBehaviour
                 _timer -= Time.deltaTime;
 
                 if (_timer < 0)
+                {
                     _timer = 0;
-
+                    OnTimerEnd?.Invoke();
+                }
+                
                 _timerFillImage.fillAmount = _timer / _maxTime;
 
             }
