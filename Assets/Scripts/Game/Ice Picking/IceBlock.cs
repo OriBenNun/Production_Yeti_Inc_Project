@@ -13,12 +13,14 @@ public class IceBlock : PoolGameObject
 
     [SerializeField] private GameObject _leftSpike;
     [SerializeField] private GameObject _rightSpike;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
     [field: SerializeField] public IceBlockVariation Variation { get; private set; }
 
-    public void Init(Vector3 position, IceBlockVariation variation)
+    public void Init(Vector3 position, IceBlockVariation variation, Sprite iceBlockSprite)
     {
         transform.position = position;
         Variation = variation;
+        _spriteRenderer.sprite = iceBlockSprite;
         SetSpikes();
 
         gameObject.SetActive(true);

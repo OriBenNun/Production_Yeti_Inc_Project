@@ -145,7 +145,7 @@ public class IcePickingManager : MonoBehaviour
         IceBlock block = _iceBlockPool.GetReadyObject();
         Vector3 position = _pillarBasePoint.position;
         position.y += _blockHeight * _icePillarQueue.Count;
-        block.Init(position, DetermineSpikeVariation());
+        block.Init(position, DetermineSpikeVariation(), _iceBlockPool.GetRandomBlockSprite());
 
         _icePillarQueue.Enqueue(block);
     }
