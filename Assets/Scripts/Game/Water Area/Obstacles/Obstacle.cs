@@ -17,7 +17,7 @@ namespace Game.Water_Area
             StartCoroutine(TurnOffSelfAfterDelay(turnOffDelay));
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (!_isMoving) { return; }
 
@@ -37,7 +37,7 @@ namespace Game.Water_Area
         
         private void MoveDown()
         {
-            transform.Translate(Vector2.down * (speed * Time.deltaTime));
+            transform.Translate(Vector2.down * (speed * Time.fixedDeltaTime));
         }
         
         private IEnumerator TurnOffSelfAfterDelay(float turnOffDelay)

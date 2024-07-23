@@ -1629,7 +1629,7 @@ MonoBehaviour:
   - {fileID: 936896210}
   - {fileID: 982997555}
   startingPosition: {fileID: 628079818}
-  swipeDetectionSensitivity: 200
+  swipeDetectionSensitivity: 170
 --- !u!1 &1138162243
 GameObject:
   m_ObjectHideFlags: 0
