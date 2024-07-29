@@ -57,8 +57,8 @@ public class IcePickingManager : MonoBehaviour
         Defense = defense;
         
         _random = new System.Random();
-        _timer = _maxTime;
-        _timerFillImage.fillAmount = 1f;
+        _timer = _maxTime / 2;
+        _timerFillImage.fillAmount = 0.5f;
         _isGraceTime = false;
         IceChopped = 0;
 
