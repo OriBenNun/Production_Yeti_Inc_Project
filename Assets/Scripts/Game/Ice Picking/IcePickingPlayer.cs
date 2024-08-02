@@ -1,54 +1,57 @@
 using UnityEngine;
 
-public class IcePickingPlayer : MonoBehaviour
+namespace Game.Ice_Picking
 {
-    [field: SerializeField] public Sides CurrentSide { get; private set; }
-
-    [SerializeField] private IcePickingManager _icePickingManager;
-
-    [SerializeField] private Transform _leftPosition;
-    [SerializeField] private Transform _rightPosition;
-
-    [SerializeField] private SpriteRenderer _sprite;
-    [SerializeField] private Animator _animator;
-
-    private void OnEnable()
+    public class IcePickingPlayer : MonoBehaviour
     {
-        _icePickingManager.OnChop += TriggerChopAnim;
-    }
+        [field: SerializeField] public Sides CurrentSide { get; private set; }
 
-    private void OnDisable()
-    {
-        _icePickingManager.OnChop -= TriggerChopAnim;
-    }
+        [SerializeField] private IcePickingManager _icePickingManager;
 
-    public void SetCurrentSide(Sides side)
-    {
-        CurrentSide = side;
-        MoveCharacter();
-    }
+        [SerializeField] private Transform _leftPosition;
+        [SerializeField] private Transform _rightPosition;
 
-    private void MoveCharacter()
-    {
-        if(Sides.Left == CurrentSide)
+        [SerializeField] private SpriteRenderer _sprite;
+        [SerializeField] private Animator _animator;
+
+        private void OnEnable()
         {
-            _sprite.transform.position = _leftPosition.position;
-            _sprite.flipX = false;
+            _icePickingManager.OnChop += TriggerChopAnim;
         }
-        else
+
+        private void OnDisable()
         {
-            _sprite.transform.position = _rightPosition.position;
-            _sprite.flipX = true;
+            _icePickingManager.OnChop -= TriggerChopAnim;
         }
-    }
 
-    private void TriggerChopAnim()
-    {
-        _animator.SetTrigger("ChopTrigger");
-    }
+        public void SetCurrentSide(Sides side)
+        {
+            CurrentSide = side;
+            MoveCharacter();
+        }
 
-    private void OnValidate()
-    {
-        MoveCharacter();
+        private void MoveCharacter()
+        {
+            if(Sides.Left == CurrentSide)
+            {
+                _sprite.transform.position = _leftPosition.position;
+                _sprite.flipX = false;
+            }
+            else
+            {
+                _sprite.transform.position = _rightPosition.position;
+                _sprite.flipX = true;
+            }
+        }
+
+        private void TriggerChopAnim()
+        {
+            _animator.SetTrigger("ChopTrigger");
+        }
+
+        private void OnValidate()
+        {
+            MoveCharacter();
+        }
     }
 }
