@@ -10,13 +10,14 @@ namespace Game.Water_Area
         private void Awake()
         {
             gameOverCanvas.gameObject.SetActive(false);
-            
-            WaterPlayer.OnPlayerDied += WaterPlayerOnOnPlayerDied;
+            Time.timeScale = 1.0f;
+            WaterPlayer.OnPlayerDied += WaterPlayerOnPlayerDied;
         }
         
         private void OnDestroy()
         {
-            WaterPlayer.OnPlayerDied -= WaterPlayerOnOnPlayerDied;
+            Time.timeScale = 1.0f;
+            WaterPlayer.OnPlayerDied -= WaterPlayerOnPlayerDied;
         }
 
         public void ReloadGameScene()
@@ -27,7 +28,14 @@ namespace Game.Water_Area
 
         public void LoadIcePickingScene()
         {
+            Time.timeScale = 1.0f;
             SceneTransitionHandler.LoadIcePickingSceneAsync();
+        }
+        
+        public void LoadMetaScene()
+        {
+            Time.timeScale = 1.0f;
+            SceneTransitionHandler.LoadMetaSceneAsync();
         }
         
         public void PauseGame()
@@ -42,7 +50,7 @@ namespace Game.Water_Area
             pauseCanvas.gameObject.SetActive(false);
         }
 
-        private void WaterPlayerOnOnPlayerDied()
+        private void WaterPlayerOnPlayerDied()
         {
             Time.timeScale = 0;
             gameOverCanvas.gameObject.SetActive(true);

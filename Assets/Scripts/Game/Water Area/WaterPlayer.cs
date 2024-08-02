@@ -1,4 +1,5 @@
 using System;
+using Game.Water_Area.Obstacles;
 using UnityEngine;
 
 namespace Game.Water_Area

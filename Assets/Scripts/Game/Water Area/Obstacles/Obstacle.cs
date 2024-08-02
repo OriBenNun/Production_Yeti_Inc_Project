@@ -1,9 +1,8 @@
-using System;
 using System.Collections;
 using Pool_System;
 using UnityEngine;
 
-namespace Game.Water_Area
+namespace Game.Water_Area.Obstacles
 {
     public class Obstacle : PoolGameObject
     {
