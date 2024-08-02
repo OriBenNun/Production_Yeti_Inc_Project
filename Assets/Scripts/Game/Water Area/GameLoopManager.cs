@@ -5,6 +5,7 @@ namespace Game.Water_Area
     public class GameLoopManager : MonoBehaviour
     {
         [SerializeField] private Canvas gameOverCanvas;
+        [SerializeField] private Canvas pauseCanvas;
 
         private void Awake()
         {
@@ -27,6 +28,18 @@ namespace Game.Water_Area
         public void LoadIcePickingScene()
         {
             SceneTransitionHandler.LoadIcePickingSceneAsync();
+        }
+        
+        public void PauseGame()
+        {
+            Time.timeScale = 0;
+            pauseCanvas.gameObject.SetActive(true);
+        }
+        
+        public void ResumeGame()
+        {
+            Time.timeScale = 1.0f;
+            pauseCanvas.gameObject.SetActive(false);
         }
 
         private void WaterPlayerOnOnPlayerDied()

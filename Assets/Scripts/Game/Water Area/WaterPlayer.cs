@@ -19,9 +19,9 @@ namespace Game.Water_Area
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (!other.CompareTag("Obstacle")) return;
+            if (!other.TryGetComponent(out Obstacle obstacle)) return;
             
-            // var obstacle = other.GetComponent<Obstacle>();
+            obstacle.Disable();
             _currentLives--;
             OnPlayerGotHit?.Invoke(_currentLives);
 
