@@ -15,7 +15,7 @@ namespace Game.Water_Area
         [SerializeField] private float swipeDetectionSensitivity = 1f;
         
         private LaneManager _currentLane;
-        private Vector2 _touchStartPosition;
+        private float _touchStartPosition;
         private bool _isDragging;
 
         private void Start()
@@ -26,7 +26,7 @@ namespace Game.Water_Area
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            _touchStartPosition = eventData.position;
+            _touchStartPosition = eventData.position.x;
             _isDragging = true;
         }
 
@@ -34,20 +34,22 @@ namespace Game.Water_Area
         {
             if (!_isDragging)
             {
-                _touchStartPosition = eventData.position;
+                _touchStartPosition = eventData.position.x;
                 _isDragging = true;
             }
             
-            var touchPosition = eventData.position;
-            var swipeDistance = touchPosition - _touchStartPosition;
+            var touchPosition = eventData.position.x;
+            var swipeDistance = Mathf.Abs(_touchStartPosition -touchPosition);
 
-            if (swipeDistance.magnitude > swipeDetectionSensitivity)
+            if (swipeDistance <= swipeDetectionSensitivity)
             {
-                var swipeDirection = swipeDistance.x > 0 ? SwipeDirection.Right : SwipeDirection.Left;
-                var lane = GetLaneBySwipeDirection(swipeDirection);
-                UpdateCurrentLaneAndMovePlayer(lane);
-                _isDragging = false;
+                return;
             }
+            
+            var swipeDirection = _touchStartPosition - touchPosition < 0 ? SwipeDirection.Right : SwipeDirection.Left;
+            var lane = GetLaneBySwipeDirection(swipeDirection);
+            UpdateCurrentLaneAndMovePlayer(lane);
+            _isDragging = false;
         }
         
         public List<LaneManager> GetLanes() => lanes;
