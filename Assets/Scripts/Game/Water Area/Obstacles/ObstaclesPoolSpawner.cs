@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Pool_System;
 using UnityEngine;
 
@@ -10,16 +9,14 @@ namespace Game.Water_Area.Obstacles
         [SerializeField] private Obstacle obstaclePrefab;
         [SerializeField] private int initialPoolSize = 50;
         [SerializeField] private WaterAreaCharacterController waterAreaCharacterController;
-        
-        private List<Sprite> _obstacleSprites;
+
         private void Awake()
         {
             InitPool(initialPoolSize, obstaclePrefab, transform);
         }
         
-        public void StartSpawningRandomObstacles(float spawnCooldown, List<Sprite> obstaclesSprites)
+        public void StartSpawningRandomObstacles(float spawnCooldown)
         {
-            _obstacleSprites = obstaclesSprites;
             StartCoroutine(SpawnRandomObstaclesWithCooldown(spawnCooldown));
         }
 
@@ -28,8 +25,7 @@ namespace Game.Water_Area.Obstacles
             var obstacle = GetReadyObject();
             obstacle.SetPosition(lane.GetObstacleSpawnPosition());
             obstacle.gameObject.SetActive(true);
-            var randomObstacleSprite = _obstacleSprites[Random.Range(0, _obstacleSprites.Count)];
-            obstacle.Init(10, randomObstacleSprite);
+            obstacle.Init(10);
             return obstacle;
         }
 
