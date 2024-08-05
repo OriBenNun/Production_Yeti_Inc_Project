@@ -145,7 +145,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      yeti swing 3_0: -5818734885750704702
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

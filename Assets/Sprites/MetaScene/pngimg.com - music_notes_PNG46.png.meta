@@ -145,7 +145,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      pngimg.com - music_notes_PNG46_0: 436109463310432693
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
