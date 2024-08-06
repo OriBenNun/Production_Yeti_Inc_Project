@@ -145,7 +145,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      boat no ice_0: -8786166197529290705
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

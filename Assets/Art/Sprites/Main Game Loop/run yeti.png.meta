@@ -145,7 +145,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      run yeti_0: 5891483682415638829
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

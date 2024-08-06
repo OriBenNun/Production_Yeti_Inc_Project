@@ -145,7 +145,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      yeti sit_0: -1459414431173500702
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

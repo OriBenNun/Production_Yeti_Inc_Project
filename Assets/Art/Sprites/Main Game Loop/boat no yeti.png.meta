@@ -145,7 +145,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      boat no yeti_0: -5227465632589716517
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
