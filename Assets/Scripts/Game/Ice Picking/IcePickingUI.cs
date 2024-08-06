@@ -1,51 +1,49 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.Ice_Picking
+public class IcePickingUI : MonoBehaviour
 {
-    public class IcePickingUI : MonoBehaviour
+    [SerializeField] private IcePickingManager _manager;
+
+    [SerializeField] private TMP_Text _iceCounter;
+    [SerializeField] private RectTransform _tapPrompt;
+    [SerializeField] private Image _helmetImage;
+
+    private void OnEnable()
     {
-        [SerializeField] private IcePickingManager _manager;
+        _manager.OnChop += UpdateOnChop;
+        _manager.OnPlayerStart += OnFirstInput;
+        _manager.OnPlayerGotHit += OnGotHit;
+        _iceCounter.text = string.Empty;
+        _tapPrompt.gameObject.SetActive(true);
 
-        [SerializeField] private TMP_Text _iceCounter;
-        [SerializeField] private RectTransform _tapPrompt;
-        [SerializeField] private Image _helmetImage;
+        if(_manager.Defense > 0)
+            _helmetImage.gameObject.SetActive(true);
+    }
 
-        private void OnEnable()
-        {
-            _manager.OnChop += UpdateOnChop;
-            _manager.OnPlayerStart += OnFirstInput;
-            _manager.OnPlayerGotHit += OnGotHit;
-            _iceCounter.text = string.Empty;
-            _tapPrompt.gameObject.SetActive(true);
+    private void OnDisable()
+    {
+        _manager.OnChop -= UpdateOnChop;
+        _manager.OnPlayerStart -= OnFirstInput;
+        _manager.OnPlayerGotHit -= OnGotHit;
+    }
 
-            if(_manager.Defense > 0)
-                _helmetImage.gameObject.SetActive(true);
-        }
+    private void UpdateOnChop()
+    {
+        _iceCounter.text = _manager.IceChopped.ToString();
+    }
 
-        private void OnDisable()
-        {
-            _manager.OnChop -= UpdateOnChop;
-            _manager.OnPlayerStart -= OnFirstInput;
-            _manager.OnPlayerGotHit -= OnGotHit;
-        }
+    private void OnFirstInput()
+    {
+        _iceCounter.text = "0";
+        _tapPrompt.gameObject.SetActive(false);
+    }
 
-        private void UpdateOnChop()
-        {
-            _iceCounter.text = _manager.IceChopped.ToString();
-        }
-
-        private void OnFirstInput()
-        {
-            _iceCounter.text = "0";
-            _tapPrompt.gameObject.SetActive(false);
-        }
-
-        private void OnGotHit(IceBlock blockHit, bool isFatal)
-        {
-            if (_manager.Defense <= 0)
-                _helmetImage.gameObject.SetActive(false);
-        }
+    private void OnGotHit(IceBlock blockHit, bool isFatal)
+    {
+        if (_manager.Defense <= 0)
+            _helmetImage.gameObject.SetActive(false);
     }
 }

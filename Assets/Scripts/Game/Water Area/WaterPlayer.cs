@@ -1,5 +1,4 @@
 using System;
-using Game.Water_Area.Obstacles;
 using UnityEngine;
 
 namespace Game.Water_Area
@@ -20,9 +19,9 @@ namespace Game.Water_Area
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (!other.TryGetComponent(out Obstacle obstacle)) return;
+            if (!other.CompareTag("Obstacle")) return;
             
-            obstacle.Disable();
+            // var obstacle = other.GetComponent<Obstacle>();
             _currentLives--;
             OnPlayerGotHit?.Invoke(_currentLives);
 
