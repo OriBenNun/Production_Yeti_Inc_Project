@@ -5,19 +5,17 @@ namespace Game.Water_Area
     public class GameLoopManager : MonoBehaviour
     {
         [SerializeField] private Canvas gameOverCanvas;
-        [SerializeField] private Canvas pauseCanvas;
 
         private void Awake()
         {
             gameOverCanvas.gameObject.SetActive(false);
-            Time.timeScale = 1.0f;
-            WaterPlayer.OnPlayerDied += WaterPlayerOnPlayerDied;
+            
+            WaterPlayer.OnPlayerDied += WaterPlayerOnOnPlayerDied;
         }
         
         private void OnDestroy()
         {
-            Time.timeScale = 1.0f;
-            WaterPlayer.OnPlayerDied -= WaterPlayerOnPlayerDied;
+            WaterPlayer.OnPlayerDied -= WaterPlayerOnOnPlayerDied;
         }
 
         public void ReloadGameScene()
@@ -28,29 +26,10 @@ namespace Game.Water_Area
 
         public void LoadIcePickingScene()
         {
-            Time.timeScale = 1.0f;
             SceneTransitionHandler.LoadIcePickingSceneAsync();
         }
-        
-        public void LoadMetaScene()
-        {
-            Time.timeScale = 1.0f;
-            SceneTransitionHandler.LoadMetaSceneAsync();
-        }
-        
-        public void PauseGame()
-        {
-            Time.timeScale = 0;
-            pauseCanvas.gameObject.SetActive(true);
-        }
-        
-        public void ResumeGame()
-        {
-            Time.timeScale = 1.0f;
-            pauseCanvas.gameObject.SetActive(false);
-        }
 
-        private void WaterPlayerOnPlayerDied()
+        private void WaterPlayerOnOnPlayerDied()
         {
             Time.timeScale = 0;
             gameOverCanvas.gameObject.SetActive(true);
