@@ -16,12 +16,12 @@ namespace Game.Water_Area
 
         private void Awake()
         {
-            IceChoppingIsland.OnIslandStopped += OnIslandStopped;
+            WaterAreaStopIsland.OnIslandStopped += OnIslandStopped;
         }
 
         private void OnDestroy()
         {
-            IceChoppingIsland.OnIslandStopped -= OnIslandStopped;
+            WaterAreaStopIsland.OnIslandStopped -= OnIslandStopped;
         }
 
         public void SpawnIsland()
@@ -32,8 +32,12 @@ namespace Game.Water_Area
             // island.transform.SetParent(laneToSpawn.transform);
         }
         
-        private void OnIslandStopped(IceChoppingIsland island)
+        private void OnIslandStopped(WaterAreaStopIsland island)
         {
+            if (island is not IceChoppingIsland)
+            {
+                return;
+            }
             OnPlayerReachedIceChoppingIsland?.Invoke();
         }
     }
