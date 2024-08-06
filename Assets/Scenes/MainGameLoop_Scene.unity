@@ -1700,7 +1700,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9127254356682311613, guid: 90b619d4bbb77584ab105fa2e157b8ef, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 390
       objectReference: {fileID: 0}
     - target: {fileID: 9127254356682311613, guid: 90b619d4bbb77584ab105fa2e157b8ef, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1891,7 +1891,7 @@ MonoBehaviour:
   - {fileID: 936896210}
   - {fileID: 982997555}
   startingPosition: {fileID: 628079818}
-  swipeDetectionSensitivity: 250
+  swipeDetectionSensitivity: 175
 --- !u!1 &1138162243
 GameObject:
   m_ObjectHideFlags: 0
@@ -2547,6 +2547,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverCanvas: {fileID: 1517918601}
   pauseCanvas: {fileID: 1718481203}
+  obstaclesManager: {fileID: 0}
+  iceChoppingIslandsManager: {fileID: 0}
+  timeUntilObstalcesStop: 5
+  timeUntilIceChoppingIslandStarts: 8
 --- !u!4 &1433202110
 Transform:
   m_ObjectHideFlags: 0
@@ -3945,7 +3949,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9127254356682311613, guid: 90b619d4bbb77584ab105fa2e157b8ef, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -390
       objectReference: {fileID: 0}
     - target: {fileID: 9127254356682311613, guid: 90b619d4bbb77584ab105fa2e157b8ef, type: 3}
       propertyPath: m_LocalPosition.y

@@ -12,6 +12,8 @@ namespace Game.Water_Area.Obstacles
         [SerializeField] private WaterAreaCharacterController waterAreaCharacterController;
         
         private List<Sprite> _obstacleSprites;
+        
+        private Coroutine _spawnRandomObstaclesWithCooldown;
         private void Awake()
         {
             InitPool(initialPoolSize, obstaclePrefab, transform);
@@ -20,7 +22,15 @@ namespace Game.Water_Area.Obstacles
         public void StartSpawningRandomObstacles(float spawnCooldown, List<Sprite> obstaclesSprites)
         {
             _obstacleSprites = obstaclesSprites;
-            StartCoroutine(SpawnRandomObstaclesWithCooldown(spawnCooldown));
+            _spawnRandomObstaclesWithCooldown = StartCoroutine(SpawnRandomObstaclesWithCooldown(spawnCooldown));
+        }
+        
+        public void StopSpawning()
+        {
+            if (_spawnRandomObstaclesWithCooldown != null)
+            {
+                StopCoroutine(_spawnRandomObstaclesWithCooldown);
+            }
         }
 
         private Obstacle SpawnNewObstacle(LaneManager lane)

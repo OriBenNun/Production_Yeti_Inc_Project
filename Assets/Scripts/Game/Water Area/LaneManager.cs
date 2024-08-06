@@ -6,6 +6,9 @@ namespace Game.Water_Area
     {
         [SerializeField] private RectTransform playerPositionTransform;
         [SerializeField] private RectTransform obstacleSpawnPositionTransform;
+        [SerializeField] private bool isEdgeLane;
+        
+        public bool IsEdgeLane() => isEdgeLane;
         
         public Vector2 GetPlayerSpawnPosition()
         {

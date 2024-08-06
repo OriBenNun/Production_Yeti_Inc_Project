@@ -60,6 +60,21 @@ namespace Game.Water_Area
             return lanes[randomIndex];
         }
         
+        public LaneManager GetRandomEdgeLane()
+        {
+            var edgeLanes = new List<LaneManager>();
+            foreach (var lane in lanes)
+            {
+                if (lane.IsEdgeLane())
+                {
+                    edgeLanes.Add(lane);
+                }
+            }
+
+            var randomIndex = Random.Range(0, edgeLanes.Count);
+            return edgeLanes[randomIndex];
+        }
+        
         private void MovePlayerToStartingPosition()
         {
             waterPlayer.MoveToPosition(startingPosition.position);
