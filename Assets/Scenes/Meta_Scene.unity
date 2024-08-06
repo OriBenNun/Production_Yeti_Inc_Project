@@ -185,10 +185,14 @@ PrefabInstance:
     - target: {fileID: 6418663930664310010, guid: 115bf07c3bb97614e9599239d5e2d9ed, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1512447626}
+      objectReference: {fileID: 180762067}
     - target: {fileID: 6418663930664310010, guid: 115bf07c3bb97614e9599239d5e2d9ed, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LeadersboardPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 6418663930664310010, guid: 115bf07c3bb97614e9599239d5e2d9ed, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Meta.Main_Menu.MainMenuManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8338728554589223550, guid: 115bf07c3bb97614e9599239d5e2d9ed, type: 3}
       propertyPath: m_AnchorMax.x
@@ -329,7 +333,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &180762066
 Transform:
   m_ObjectHideFlags: 0
@@ -357,6 +361,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 197fd5f6fbc30fe4f91c16505bdd0a8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingsPanel: {fileID: 2110633708}
+  leadersPanel: {fileID: 123064845}
 --- !u!1 &209659946
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,26 +1036,38 @@ PrefabInstance:
     - target: {fileID: 194837852156909485, guid: d21d83f3a0fc59343bb0e2bfebd3be73, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1512447626}
+      objectReference: {fileID: 180762067}
     - target: {fileID: 194837852156909485, guid: d21d83f3a0fc59343bb0e2bfebd3be73, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LeadersboardPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 194837852156909485, guid: d21d83f3a0fc59343bb0e2bfebd3be73, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Meta.Main_Menu.MainMenuManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2537675064078977410, guid: d21d83f3a0fc59343bb0e2bfebd3be73, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1512447626}
+      objectReference: {fileID: 180762067}
     - target: {fileID: 2537675064078977410, guid: d21d83f3a0fc59343bb0e2bfebd3be73, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PlayGame
+      value: StartGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537675064078977410, guid: d21d83f3a0fc59343bb0e2bfebd3be73, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Meta.Main_Menu.MainMenuManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2547749213082269069, guid: d21d83f3a0fc59343bb0e2bfebd3be73, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1512447626}
+      objectReference: {fileID: 180762067}
     - target: {fileID: 2547749213082269069, guid: d21d83f3a0fc59343bb0e2bfebd3be73, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SettingsPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2547749213082269069, guid: d21d83f3a0fc59343bb0e2bfebd3be73, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Meta.Main_Menu.MainMenuManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4987559662292958294, guid: d21d83f3a0fc59343bb0e2bfebd3be73, type: 3}
       propertyPath: m_Pivot.x
@@ -1477,52 +1495,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1512447625
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1512447627}
-  - component: {fileID: 1512447626}
-  m_Layer: 0
-  m_Name: UI Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1512447626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1512447625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 380fcea7a20162e48a2a060dfc8c4c32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  settingsPanel: {fileID: 2110633708}
-  leadersPanel: {fileID: 123064845}
---- !u!4 &1512447627
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1512447625}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1811.8971, y: 1351.5454, z: -18.200638}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2110633706
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1534,10 +1506,14 @@ PrefabInstance:
     - target: {fileID: 2904333697360508647, guid: 7531ba1ff702afa4599ed1aeaa523e7d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1512447626}
+      objectReference: {fileID: 180762067}
     - target: {fileID: 2904333697360508647, guid: 7531ba1ff702afa4599ed1aeaa523e7d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SettingsPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904333697360508647, guid: 7531ba1ff702afa4599ed1aeaa523e7d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Meta.Main_Menu.MainMenuManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6734947747721522465, guid: 7531ba1ff702afa4599ed1aeaa523e7d, type: 3}
       propertyPath: m_Name
@@ -1651,4 +1627,3 @@ SceneRoots:
   - {fileID: 497784085}
   - {fileID: 180762066}
   - {fileID: 1246529986}
-  - {fileID: 1512447627}
