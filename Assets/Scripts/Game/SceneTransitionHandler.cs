@@ -4,8 +4,9 @@ namespace Game
 {
     public static class SceneTransitionHandler
     {
-        private const int _gameSceneIndex = 0;
-        private const int _icePickingSceneIndex = 1;
+        private const int _metaSceneIndex = 0;
+        private const int _gameSceneIndex = 1;
+        private const int _icePickingSceneIndex = 2;
 
         public static void LoadGameSceneAsync()
         {
@@ -16,10 +17,16 @@ namespace Game
         {
             LoadSceneAsync(_icePickingSceneIndex);
         }
-    
+        
+        public static void LoadMetaSceneAsync()
+        {
+            LoadSceneAsync(_metaSceneIndex);
+        }
+        
         private static void LoadSceneAsync(int index)
         {
             SceneManager.LoadSceneAsync(index);
         }
+
     }
 }
