@@ -1,20 +1,22 @@
-using System;
 using System.Collections;
 using Pool_System;
 using UnityEngine;
 
-namespace Game.Water_Area
+namespace Game.Water_Area.Obstacles
 {
     public class Obstacle : PoolGameObject
     {
         [SerializeField] private float speed = 3f;
+        [SerializeField] private SpriteRenderer spriteRenderer;
         
         private bool _isMoving;
-        public void Init(float turnOffDelay)
+        public void Init(float turnOffDelay, Sprite randomObstacleSprite)
         {
             _isMoving = true;
 
-            StartCoroutine(TurnOffSelfAfterDelay(turnOffDelay));
+            spriteRenderer.sprite = randomObstacleSprite;
+
+            StartCoroutine(DisableAfterDelay(turnOffDelay));
         }
 
         private void FixedUpdate()
@@ -34,17 +36,22 @@ namespace Game.Water_Area
         {
             transform.position = position;
         }
-        
+
+        public void Disable()
+        {
+            gameObject.SetActive(false);
+        }
+
         private void MoveDown()
         {
             transform.Translate(Vector2.down * (speed * Time.fixedDeltaTime));
         }
         
-        private IEnumerator TurnOffSelfAfterDelay(float turnOffDelay)
+        private IEnumerator DisableAfterDelay(float turnOffDelay)
         {
             yield return new WaitForSeconds(turnOffDelay);
             
-            gameObject.SetActive(false);
+            Disable();
         }
     }
 }
