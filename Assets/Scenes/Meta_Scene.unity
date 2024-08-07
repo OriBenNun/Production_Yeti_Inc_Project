@@ -152,11 +152,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2200237755058153200, guid: 115bf07c3bb97614e9599239d5e2d9ed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 2200237755058153200, guid: 115bf07c3bb97614e9599239d5e2d9ed, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 550
       objectReference: {fileID: 0}
     - target: {fileID: 4369700237308375220, guid: 115bf07c3bb97614e9599239d5e2d9ed, type: 3}
       propertyPath: m_AnchorMax.x
@@ -176,11 +176,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4369700237308375220, guid: 115bf07c3bb97614e9599239d5e2d9ed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -300
       objectReference: {fileID: 0}
     - target: {fileID: 4369700237308375220, guid: 115bf07c3bb97614e9599239d5e2d9ed, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 550
       objectReference: {fileID: 0}
     - target: {fileID: 6418663930664310010, guid: 115bf07c3bb97614e9599239d5e2d9ed, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -196,7 +196,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8338728554589223550, guid: 115bf07c3bb97614e9599239d5e2d9ed, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8338728554589223550, guid: 115bf07c3bb97614e9599239d5e2d9ed, type: 3}
       propertyPath: m_AnchorMax.y
@@ -296,11 +296,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8498191223544676024, guid: 115bf07c3bb97614e9599239d5e2d9ed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -300
       objectReference: {fileID: 0}
     - target: {fileID: 8498191223544676024, guid: 115bf07c3bb97614e9599239d5e2d9ed, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -550
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -557,7 +557,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -7752743384259697205, guid: b0280c0f27e0aed4f9c1fa6389d36c91, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
