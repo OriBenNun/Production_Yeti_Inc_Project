@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1802df5ca633d03489341deb6e61d540
+guid: 4e482cdcc5a3643418118b7ff95edbd8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6001160432716519639
-    second: Icepicking_Background_0
+      213: -7322542496071227452
+    second: IcePickingBG_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Icepicking_Background_0
+      name: IcePickingBG_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7d892383e97684350800000000000000
-      internalID: 6001160432716519639
+      spriteID: 4c7e8f4756a116a90800000000000000
+      internalID: -7322542496071227452
       vertices: []
       indices: 
       edges: []
@@ -145,8 +145,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Icepicking_Background_0: 6001160432716519639
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
