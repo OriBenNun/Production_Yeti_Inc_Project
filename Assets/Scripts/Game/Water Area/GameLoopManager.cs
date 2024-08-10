@@ -20,6 +20,8 @@ namespace Game.Water_Area
         
         // private float _timeFromStart;
         
+        private static int _iceChoppingIslandStops = 0;
+        
         private void Awake()
         {
             gameOverCanvas.gameObject.SetActive(false);
@@ -46,12 +48,14 @@ namespace Game.Water_Area
         public void ReloadGameScene()
         {
             Time.timeScale = 1.0f;
+            _iceChoppingIslandStops = 0;
             SceneTransitionHandler.LoadGameSceneAsync();
         }
         
         public void LoadMetaScene()
         {
             Time.timeScale = 1.0f;
+            _iceChoppingIslandStops = 0;
             SceneTransitionHandler.LoadMetaSceneAsync();
         }
         
@@ -70,8 +74,9 @@ namespace Game.Water_Area
         private IEnumerator StartGameSequence()
         {
             obstaclesManager.StartSpawning();
-            
-            yield return new WaitForSeconds(timeUntilObstaclesStop);
+
+            var timeToWait = Mathf.Max((_iceChoppingIslandStops + 1) / 2f * timeUntilObstaclesStop, timeUntilObstaclesStop);
+            yield return new WaitForSeconds(timeToWait);
             
             obstaclesManager.StopSpawning();
             
@@ -99,6 +104,7 @@ namespace Game.Water_Area
         private void LoadIcePickingScene()
         {
             Time.timeScale = 1.0f;
+            _iceChoppingIslandStops++;
             SceneTransitionHandler.LoadIcePickingSceneAsync();
         }
 
