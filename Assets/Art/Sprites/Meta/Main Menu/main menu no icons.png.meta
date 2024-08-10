@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 67c0c721e4f458a47a9982a6a7b61487
+guid: f350dd76ae5be5846a2d2044456cdb92
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5818734885750704702
-    second: yeti swing 3_0
+      213: -2769275436308991008
+    second: main menu no icons_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: yeti swing 3_0
+      name: main menu no icons_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 607
-        height: 814
+        width: 1290
+        height: 2796
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2c5f7ac4373bf3fa0800000000000000
-      internalID: -5818734885750704702
+      spriteID: 0e37695b9ae8199d0800000000000000
+      internalID: -2769275436308991008
       vertices: []
       indices: 
       edges: []
@@ -145,8 +145,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      yeti swing 3_0: -5818734885750704702
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
