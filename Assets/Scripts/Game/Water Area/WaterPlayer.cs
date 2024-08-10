@@ -68,7 +68,7 @@ namespace Game.Water_Area
         {
             while ((Vector2)transform.position != position)
             {
-                transform.position = Vector3.MoveTowards(transform.position, position, moveSpeed);
+                transform.position = Vector3.MoveTowards(transform.position, position, moveSpeed * Time.deltaTime);
                 yield return null;
             }
         }
@@ -80,7 +80,7 @@ namespace Game.Water_Area
             position.x += shiftEdge;
             while ((Vector2)transform.position != position)
             {
-                transform.position = Vector3.MoveTowards(transform.position, position, moveToIslandSpeed);
+                transform.position = Vector3.MoveTowards(transform.position, position, moveToIslandSpeed * Time.deltaTime);
                 yield return null;
             }
             
