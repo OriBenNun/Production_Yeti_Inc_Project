@@ -10,9 +10,9 @@ namespace Game.Water_Area
         [SerializeField] private float yPositionToStop = 4f;
         [SerializeField] private float islandSpeed = 1f;
 
-        private IceChoppingIsland _instansiatedIsland;
+        private IceChoppingIsland _instantiatedIsland;
         
-        public static event Action OnPlayerReachedIceChoppingIsland;
+        public static event Action<IceChoppingIsland> OnIceChoppingIslandStopped;
 
         private void Awake()
         {
@@ -27,18 +27,18 @@ namespace Game.Water_Area
         public void SpawnIsland()
         {
             var laneToSpawn = waterAreaCharacterController.GetRandomEdgeLane();
-            _instansiatedIsland = Instantiate(islandPrefab, laneToSpawn.GetObstacleSpawnPosition(), Quaternion.identity);
-            _instansiatedIsland.Init(islandSpeed, yPositionToStop);
-            // island.transform.SetParent(laneToSpawn.transform);
+            _instantiatedIsland = Instantiate(islandPrefab, laneToSpawn.GetObstacleSpawnPosition(), Quaternion.identity);
+            _instantiatedIsland.Init(islandSpeed, yPositionToStop, laneToSpawn);
         }
         
         private void OnIslandStopped(WaterAreaStopIsland island)
         {
-            if (island is not IceChoppingIsland)
+            if (island is not IceChoppingIsland choppingIsland)
             {
                 return;
             }
-            OnPlayerReachedIceChoppingIsland?.Invoke();
+            
+            OnIceChoppingIslandStopped?.Invoke(choppingIsland);
         }
     }
 }

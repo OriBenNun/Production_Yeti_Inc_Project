@@ -1,6 +1,7 @@
 using System.Collections;
 using Game.Water_Area.Obstacles;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Water_Area
 {
@@ -11,11 +12,13 @@ namespace Game.Water_Area
 
         [SerializeField] private ObstaclesManager obstaclesManager;
         [SerializeField] private IceChoppingIslandsManager iceChoppingIslandsManager;
-        [SerializeField] private float timeUntilObstalcesStop = 5f;
-        [SerializeField] private float timeUntilIceChoppingIslandStarts = 8f;
-
-
-        private float _timeFromStart;
+        [SerializeField] private float timeUntilObstaclesStop = 5f;
+        [SerializeField] private float timeBetweenObstaclesStopAndChoppingIslandSpawn = 1f;
+        
+        [SerializeField] private WaterAreaCharacterController waterAreaCharacterController;
+        [SerializeField] private WaterPlayer waterPlayer;
+        
+        // private float _timeFromStart;
         
         private void Awake()
         {
@@ -23,7 +26,8 @@ namespace Game.Water_Area
             Time.timeScale = 1.0f;
             
             WaterPlayer.OnPlayerDied += WaterPlayerOnPlayerDied;
-            IceChoppingIslandsManager.OnPlayerReachedIceChoppingIsland += HandleOnPlayerReachedIceChoppingIsland;
+            WaterPlayer.OnPlayerReachedIsland += HandleOnPlayerReachedIsland;
+            IceChoppingIslandsManager.OnIceChoppingIslandStopped += HandleOnIceChoppingIslandStopped;
         }
 
         private void Start()
@@ -31,24 +35,12 @@ namespace Game.Water_Area
             StartCoroutine(StartGameSequence());
         }
 
-        private IEnumerator StartGameSequence()
-        {
-            obstaclesManager.StartSpawning();
-            
-            yield return new WaitForSeconds(timeUntilObstalcesStop);
-            
-            obstaclesManager.StopSpawning();
-            
-            yield return new WaitForSeconds(timeUntilIceChoppingIslandStarts);
-            
-            iceChoppingIslandsManager.SpawnIsland();
-        }
-
         private void OnDestroy()
         {
             Time.timeScale = 1.0f;
             WaterPlayer.OnPlayerDied -= WaterPlayerOnPlayerDied;
-            IceChoppingIslandsManager.OnPlayerReachedIceChoppingIsland -= HandleOnPlayerReachedIceChoppingIsland;
+            WaterPlayer.OnPlayerReachedIsland -= HandleOnPlayerReachedIsland;
+            IceChoppingIslandsManager.OnIceChoppingIslandStopped -= HandleOnIceChoppingIslandStopped;
         }
 
         public void ReloadGameScene()
@@ -75,11 +67,35 @@ namespace Game.Water_Area
             pauseCanvas.gameObject.SetActive(false);
         }
         
-        private void HandleOnPlayerReachedIceChoppingIsland()
+        private IEnumerator StartGameSequence()
         {
-            LoadIcePickingScene();
+            obstaclesManager.StartSpawning();
+            
+            yield return new WaitForSeconds(timeUntilObstaclesStop);
+            
+            obstaclesManager.StopSpawning();
+            
+            yield return new WaitForSeconds(timeBetweenObstaclesStopAndChoppingIslandSpawn);
+            
+            iceChoppingIslandsManager.SpawnIsland();
         }
         
+        private void HandleOnIceChoppingIslandStopped(IceChoppingIsland island)
+        {
+            StartMovePlayerToStoppedIsland(island);
+        }
+
+        private void StartMovePlayerToStoppedIsland(IceChoppingIsland island)
+        {
+            DisableControls();
+            waterPlayer.StartMoveToIsland(island);
+        }
+
+        private void DisableControls()
+        {
+            waterAreaCharacterController.DisableControls();
+        }
+
         private void LoadIcePickingScene()
         {
             Time.timeScale = 1.0f;
@@ -90,6 +106,15 @@ namespace Game.Water_Area
         {
             Time.timeScale = 0;
             gameOverCanvas.gameObject.SetActive(true);
+        }
+        
+        private void HandleOnPlayerReachedIsland(WaterAreaStopIsland island)
+        {
+            if (island is IceChoppingIsland)
+            {
+                // TODO add yeti animation
+                LoadIcePickingScene();
+            }
         }
         
     }

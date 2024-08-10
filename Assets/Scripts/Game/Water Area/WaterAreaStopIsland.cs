@@ -7,9 +7,15 @@ namespace Game.Water_Area
     public class WaterAreaStopIsland : MonoBehaviour
     {
         public static event Action<WaterAreaStopIsland> OnIslandStopped;
-        public void Init(float speed,float yPositionToStop)
+
+        protected void Init(float speed,float yPositionToStop)
         {
             StartCoroutine(MoveDownwardsUntilStop(speed, yPositionToStop));
+        }
+        
+        public Vector2 GetPosition()
+        {
+            return transform.position;
         }
 
         private IEnumerator MoveDownwardsUntilStop(float speed, float yPositionToStop)
