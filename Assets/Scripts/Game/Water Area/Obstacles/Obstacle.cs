@@ -6,20 +6,21 @@ namespace Game.Water_Area.Obstacles
 {
     public class Obstacle : PoolGameObject
     {
-        [SerializeField] private float speed = 3f;
         [SerializeField] private SpriteRenderer spriteRenderer;
         
+        private float _speed;
         private bool _isMoving;
-        public void Init(float turnOffDelay, Sprite randomObstacleSprite)
+        public void Init(float turnOffDelay, Sprite randomObstacleSprite, float speed)
         {
             _isMoving = true;
-
+            _speed = speed;
+            
             spriteRenderer.sprite = randomObstacleSprite;
 
             StartCoroutine(DisableAfterDelay(turnOffDelay));
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             if (!_isMoving) { return; }
 
@@ -44,7 +45,7 @@ namespace Game.Water_Area.Obstacles
 
         private void MoveDown()
         {
-            transform.Translate(Vector2.down * (speed * Time.fixedDeltaTime));
+            transform.Translate(Vector2.down * (_speed * Time.deltaTime));
         }
         
         private IEnumerator DisableAfterDelay(float turnOffDelay)

@@ -14,7 +14,13 @@ namespace Game.Water_Area
         [SerializeField] private IceChoppingIslandsManager iceChoppingIslandsManager;
         [SerializeField] private float timeUntilObstaclesStop = 5f;
         [SerializeField] private float timeBetweenObstaclesStopAndChoppingIslandSpawn = 1f;
-        
+        [SerializeField] private float initialObstacleSpeed = 2.6f;
+        [SerializeField] private float initialSpawnCooldown = 1.4f;
+        [SerializeField] private float minimumSpawnCooldown = 0.4f;
+        [SerializeField] private float obstacleSpeedMultiplierPerIceChoppingIslandStop = 0.5f;
+        [SerializeField] private float timeBetweenMultiplierPerIceChoppingIslandStop = 0.5f;
+        [SerializeField] private float spawnCooldownMultiplierPerIceChoppingIslandStop = 0.2f;
+
         [SerializeField] private WaterAreaCharacterController waterAreaCharacterController;
         [SerializeField] private WaterPlayer waterPlayer;
         
@@ -73,9 +79,11 @@ namespace Game.Water_Area
         
         private IEnumerator StartGameSequence()
         {
-            obstaclesManager.StartSpawning();
+            var speed = initialObstacleSpeed + _iceChoppingIslandStops * obstacleSpeedMultiplierPerIceChoppingIslandStop;
+            var spawnCooldown = Mathf.Max(minimumSpawnCooldown,initialSpawnCooldown - _iceChoppingIslandStops * spawnCooldownMultiplierPerIceChoppingIslandStop);
+            obstaclesManager.StartSpawning(spawnCooldown, speed);
 
-            var timeToWait = Mathf.Max((_iceChoppingIslandStops + 1) / 2f * timeUntilObstaclesStop, timeUntilObstaclesStop);
+            var timeToWait = timeUntilObstaclesStop + _iceChoppingIslandStops * timeBetweenMultiplierPerIceChoppingIslandStop;
             yield return new WaitForSeconds(timeToWait);
             
             obstaclesManager.StopSpawning();

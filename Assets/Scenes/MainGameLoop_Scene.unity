@@ -285,7 +285,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b621f65f8b2534441867e51ce5743d8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialSpawnCooldown: 1.4
   obstaclesPoolSpawner: {fileID: 572372065}
   obstaclesSprites:
   - {fileID: 2804623222839247984, guid: 8c6e865540e6d9e409237516ae6a83c5, type: 3}
@@ -614,21 +613,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6402676333818077789, guid: 6f4eef53f7c40c5418f6b039b51a8482, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 6456734978686653492, guid: 6f4eef53f7c40c5418f6b039b51a8482, type: 3}
-      propertyPath: moveToIslandDestinationShift
-      value: 0.6
-      objectReference: {fileID: 0}
     - target: {fileID: 7008139517876468164, guid: 6f4eef53f7c40c5418f6b039b51a8482, type: 3}
       propertyPath: m_Name
       value: Water_Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8541268798424103660, guid: 6f4eef53f7c40c5418f6b039b51a8482, type: 3}
-      propertyPath: EmissionModule.rateOverTime.scalar
-      value: 600
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2690,6 +2677,12 @@ MonoBehaviour:
   iceChoppingIslandsManager: {fileID: 294660652}
   timeUntilObstaclesStop: 15
   timeBetweenObstaclesStopAndChoppingIslandSpawn: 0.3
+  initialObstacleSpeed: 2.6
+  initialSpawnCooldown: 1.4
+  minimumSpawnCooldown: 0.4
+  obstacleSpeedMultiplierPerIceChoppingIslandStop: 0.5
+  timeBetweenMultiplierPerIceChoppingIslandStop: 0.5
+  spawnCooldownMultiplierPerIceChoppingIslandStop: 0.1
   waterAreaCharacterController: {fileID: 1095114999}
   waterPlayer: {fileID: 244422682}
 --- !u!4 &1433202110
