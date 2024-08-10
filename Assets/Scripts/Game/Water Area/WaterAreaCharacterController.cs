@@ -38,11 +38,7 @@ namespace Game.Water_Area
         {
             if (_isDisabled) return;
             
-            if (!_isDragging)
-            {
-                _touchStartPosition = eventData.position.x;
-                _isDragging = true;
-            }
+            if (!_isDragging) { return; }
             
             var touchPosition = eventData.position.x;
             var swipeDistance = Mathf.Abs(_touchStartPosition -touchPosition);

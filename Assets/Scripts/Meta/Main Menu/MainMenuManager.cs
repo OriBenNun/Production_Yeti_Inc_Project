@@ -8,6 +8,11 @@ namespace Meta.Main_Menu
         [SerializeField] GameObject settingsPanel;
         [SerializeField] GameObject leadersPanel;
 
+        private void Awake()
+        {
+            Application.targetFrameRate = 60;
+        }
+ 
         public void StartGame()
         {
             SceneTransitionHandler.LoadGameSceneAsync();
