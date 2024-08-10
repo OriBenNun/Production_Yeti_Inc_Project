@@ -145,7 +145,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Iceblock_3_0: 8752011222176020483
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

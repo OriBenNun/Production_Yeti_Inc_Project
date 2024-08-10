@@ -145,7 +145,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      IcePickingBG_0: -7322542496071227452
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
