@@ -6,6 +6,9 @@ namespace Game.Water_Area
     {
         [SerializeField] private RectTransform playerPositionTransform;
         [SerializeField] private RectTransform obstacleSpawnPositionTransform;
+        [SerializeField] private LanePosition lanePosition;
+        
+        public LanePosition GetLanePositionType() => lanePosition;
         
         public Vector2 GetPlayerSpawnPosition()
         {
@@ -16,5 +19,12 @@ namespace Game.Water_Area
         {
             return obstacleSpawnPositionTransform.position;
         }
+    }
+    
+    public enum LanePosition
+    {
+        Left,
+        Center,
+        Right
     }
 }

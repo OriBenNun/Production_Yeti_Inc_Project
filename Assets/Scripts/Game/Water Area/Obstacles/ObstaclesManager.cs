@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,9 +9,14 @@ namespace Game.Water_Area.Obstacles
         [SerializeField] private ObstaclesPoolSpawner obstaclesPoolSpawner;
         [SerializeField] private List<Sprite> obstaclesSprites;
 
-        private void Start()
+        public void StartSpawning()
         {
             obstaclesPoolSpawner.StartSpawningRandomObstacles(initialSpawnCooldown, obstaclesSprites);
+        }
+        
+        public void StopSpawning()
+        {
+            obstaclesPoolSpawner.StopSpawning();
         }
     }
 }

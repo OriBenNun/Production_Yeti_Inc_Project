@@ -1,4 +1,7 @@
+using System.Collections;
+using Game.Water_Area.Obstacles;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Water_Area
 {
@@ -7,29 +10,43 @@ namespace Game.Water_Area
         [SerializeField] private Canvas gameOverCanvas;
         [SerializeField] private Canvas pauseCanvas;
 
+        [SerializeField] private ObstaclesManager obstaclesManager;
+        [SerializeField] private IceChoppingIslandsManager iceChoppingIslandsManager;
+        [SerializeField] private float timeUntilObstaclesStop = 5f;
+        [SerializeField] private float timeBetweenObstaclesStopAndChoppingIslandSpawn = 1f;
+        
+        [SerializeField] private WaterAreaCharacterController waterAreaCharacterController;
+        [SerializeField] private WaterPlayer waterPlayer;
+        
+        // private float _timeFromStart;
+        
         private void Awake()
         {
             gameOverCanvas.gameObject.SetActive(false);
             Time.timeScale = 1.0f;
+            
             WaterPlayer.OnPlayerDied += WaterPlayerOnPlayerDied;
+            WaterPlayer.OnPlayerReachedIsland += HandleOnPlayerReachedIsland;
+            IceChoppingIslandsManager.OnIceChoppingIslandStopped += HandleOnIceChoppingIslandStopped;
         }
-        
+
+        private void Start()
+        {
+            StartCoroutine(StartGameSequence());
+        }
+
         private void OnDestroy()
         {
             Time.timeScale = 1.0f;
             WaterPlayer.OnPlayerDied -= WaterPlayerOnPlayerDied;
+            WaterPlayer.OnPlayerReachedIsland -= HandleOnPlayerReachedIsland;
+            IceChoppingIslandsManager.OnIceChoppingIslandStopped -= HandleOnIceChoppingIslandStopped;
         }
 
         public void ReloadGameScene()
         {
             Time.timeScale = 1.0f;
             SceneTransitionHandler.LoadGameSceneAsync();
-        }
-
-        public void LoadIcePickingScene()
-        {
-            Time.timeScale = 1.0f;
-            SceneTransitionHandler.LoadIcePickingSceneAsync();
         }
         
         public void LoadMetaScene()
@@ -49,11 +66,55 @@ namespace Game.Water_Area
             Time.timeScale = 1.0f;
             pauseCanvas.gameObject.SetActive(false);
         }
+        
+        private IEnumerator StartGameSequence()
+        {
+            obstaclesManager.StartSpawning();
+            
+            yield return new WaitForSeconds(timeUntilObstaclesStop);
+            
+            obstaclesManager.StopSpawning();
+            
+            yield return new WaitForSeconds(timeBetweenObstaclesStopAndChoppingIslandSpawn);
+            
+            iceChoppingIslandsManager.SpawnIsland();
+        }
+        
+        private void HandleOnIceChoppingIslandStopped(IceChoppingIsland island)
+        {
+            StartMovePlayerToStoppedIsland(island);
+        }
+
+        private void StartMovePlayerToStoppedIsland(IceChoppingIsland island)
+        {
+            DisableControls();
+            waterPlayer.StartMoveToIsland(island);
+        }
+
+        private void DisableControls()
+        {
+            waterAreaCharacterController.DisableControls();
+        }
+
+        private void LoadIcePickingScene()
+        {
+            Time.timeScale = 1.0f;
+            SceneTransitionHandler.LoadIcePickingSceneAsync();
+        }
 
         private void WaterPlayerOnPlayerDied()
         {
             Time.timeScale = 0;
             gameOverCanvas.gameObject.SetActive(true);
+        }
+        
+        private void HandleOnPlayerReachedIsland(WaterAreaStopIsland island)
+        {
+            if (island is IceChoppingIsland)
+            {
+                // TODO add yeti animation
+                LoadIcePickingScene();
+            }
         }
         
     }

@@ -17,6 +17,8 @@ namespace Game.Water_Area
         private LaneManager _currentLane;
         private float _touchStartPosition;
         private bool _isDragging;
+        
+        private bool _isDisabled;
 
         private void Start()
         {
@@ -26,12 +28,16 @@ namespace Game.Water_Area
 
         public void OnBeginDrag(PointerEventData eventData)
         {
+            if (_isDisabled) return;
+            
             _touchStartPosition = eventData.position.x;
             _isDragging = true;
         }
 
         public void OnDrag(PointerEventData eventData)
         {
+            if (_isDisabled) return;
+            
             if (!_isDragging)
             {
                 _touchStartPosition = eventData.position.x;
@@ -52,6 +58,11 @@ namespace Game.Water_Area
             _isDragging = false;
         }
         
+        public void DisableControls()
+        {
+            _isDisabled = true;
+        }
+        
         public List<LaneManager> GetLanes() => lanes;
         
         public LaneManager GetRandomLane()
@@ -60,9 +71,31 @@ namespace Game.Water_Area
             return lanes[randomIndex];
         }
         
+        public LaneManager GetRandomEdgeLane()
+        {
+            var edgeLanes = new List<LaneManager>();
+            foreach (var lane in lanes)
+            {
+                switch (lane.GetLanePositionType())
+                {
+                    case LanePosition.Center:
+                        break;
+                    case LanePosition.Left:
+                    case LanePosition.Right:
+                        edgeLanes.Add(lane);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+
+            var randomIndex = Random.Range(0, edgeLanes.Count);
+            return edgeLanes[randomIndex];
+        }
+        
         private void MovePlayerToStartingPosition()
         {
-            waterPlayer.MoveToPosition(startingPosition.position);
+            waterPlayer.StartMoveToPosition(startingPosition.position);
         }
 
         private void UpdateCurrentLaneAndMovePlayer(LaneManager lane)

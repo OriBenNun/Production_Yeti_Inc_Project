@@ -96,7 +96,7 @@ namespace Game.Ice_Picking
             bool rightHit = (side == Sides.Right) && (variation == IceBlock.IceBlockVariation.RightSpike);
             bool leftHit = (side == Sides.Left) && (variation == IceBlock.IceBlockVariation.LeftSpike);
             if (rightHit || leftHit)
-                PlayerHit();
+                PlayerGotHit();
 
        
             // Timer Handling
@@ -110,10 +110,8 @@ namespace Game.Ice_Picking
             OnChop?.Invoke();
         }
 
-        private void PlayerHit()
+        private void PlayerGotHit()
         {
-            Debug.Log("Player Got Hit");
-
             if (Defense > 0)
             {
                 Defense--;

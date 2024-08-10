@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Game.Water_Area.Obstacles;
 using UnityEngine;
 
@@ -7,12 +8,19 @@ namespace Game.Water_Area
     public class WaterPlayer : MonoBehaviour
     {
         [SerializeField] private int startingLives = 5;
+        [SerializeField] private float moveSpeed = 1.0f;
+        [SerializeField] private float moveToIslandSpeed = 0.5f;
+        [SerializeField] private float moveToIslandDestinationShift = 0.5f;
         
         public static event Action<int> OnPlayerGotHit;
         public static event Action OnPlayerDied;
+
+        public static event Action<WaterAreaStopIsland> OnPlayerReachedIsland;
         
         private int _currentLives;
-
+        
+        private Coroutine _moveCoroutine;
+        
         private void Awake()
         {
             _currentLives = startingLives;
@@ -35,12 +43,48 @@ namespace Game.Water_Area
         public void MoveToLane(LaneManager currentLane)
         {
             var pos = currentLane.GetPlayerSpawnPosition();
-            transform.position = new Vector3(pos.x, pos.y, 0);
+            StartMoveToPosition(pos);
+        }
+        
+        public void StartMoveToPosition(Vector2 position)
+        {
+            if (_moveCoroutine != null)
+            {
+                StopCoroutine(_moveCoroutine);
+            }
+            _moveCoroutine = StartCoroutine(StartMoveTowardsPosition(position));
+        }
+        
+        public void StartMoveToIsland(WaterAreaStopIsland island)
+        {
+            if (_moveCoroutine != null)
+            {
+                StopCoroutine(_moveCoroutine);
+            }
+            _moveCoroutine = StartCoroutine(StartMoveTowardsIsland(island));
         }
 
-        public void MoveToPosition(Vector2 position)
+        private IEnumerator StartMoveTowardsPosition(Vector2 position)
         {
-            transform.position = position;
+            while ((Vector2)transform.position != position)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, position, moveSpeed);
+                yield return null;
+            }
+        }
+        
+        private IEnumerator StartMoveTowardsIsland(WaterAreaStopIsland island)
+        {
+            var position = island.GetPosition();
+            var shiftEdge = moveToIslandDestinationShift * (position.x < 0 ? 1 : -1);
+            position.x += shiftEdge;
+            while ((Vector2)transform.position != position)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, position, moveToIslandSpeed);
+                yield return null;
+            }
+            
+            OnPlayerReachedIsland?.Invoke(island);
         }
     }
 }
