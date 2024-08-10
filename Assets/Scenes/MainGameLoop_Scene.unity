@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b621f65f8b2534441867e51ce5743d8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialSpawnCooldown: 1.15
+  initialSpawnCooldown: 1.4
   obstaclesPoolSpawner: {fileID: 572372065}
   obstaclesSprites:
   - {fileID: 2804623222839247984, guid: 8c6e865540e6d9e409237516ae6a83c5, type: 3}
