@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2bc80bd5fad5fa14fb4a4c1db721ed93
+guid: a740eaf16d91fbf42b4b601bc9cc9561
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8396061910823696593
-    second: Wood_Shop_0
+      213: 6193186700030864444
+    second: Helmet_Shop_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Wood_Shop_0
+      name: Helmet_Shop_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 140
-        height: 36
+        width: 84
+        height: 65
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1d875dad2ddc48470800000000000000
-      internalID: 8396061910823696593
+      spriteID: c3c6303ad7e92f550800000000000000
+      internalID: 6193186700030864444
       vertices: []
       indices: 
       edges: []
@@ -146,7 +146,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Wood_Shop_0: 8396061910823696593
+      Helmet_Shop_0: 6193186700030864444
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

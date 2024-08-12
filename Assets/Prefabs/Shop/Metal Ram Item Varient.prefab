@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 391961774603106183, guid: 1c060a27a2f483f4c80ea73c535baf3a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: beee3ef91c9dd1c44bd80ee0fed6c782, type: 3}
     - target: {fileID: 2657594917286385263, guid: 1c060a27a2f483f4c80ea73c535baf3a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -58,15 +62,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2657594917286385263, guid: 1c060a27a2f483f4c80ea73c535baf3a, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2657594917286385263, guid: 1c060a27a2f483f4c80ea73c535baf3a, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2657594917286385263, guid: 1c060a27a2f483f4c80ea73c535baf3a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2657594917286385263, guid: 1c060a27a2f483f4c80ea73c535baf3a, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -94,7 +98,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: d2cfe89ae7c37e543a4a1108fb707b89, type: 2}
     - target: {fileID: 5625908162963787283, guid: 1c060a27a2f483f4c80ea73c535baf3a, type: 3}
       propertyPath: m_Name
-      value: Metal Ram Item
+      value: Metal Ram Item Varient
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
