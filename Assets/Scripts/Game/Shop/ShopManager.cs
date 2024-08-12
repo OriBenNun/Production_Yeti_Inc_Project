@@ -1,0 +1,7 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ShopManager : MonoBehaviour
+{
+    [SerializeField] private List<ShopItem> _items;
+}
