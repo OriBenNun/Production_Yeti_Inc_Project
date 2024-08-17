@@ -47,15 +47,11 @@ public class ShopItem : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         if (!_isPurchasable) return;
-
-
-        throw new System.NotImplementedException();
+        _shopManager.OpenCheckout(this);
     }
 
     public void UpdateState()
     {
-        
-
         switch (Data.Enum)
         {
             case ItemEnums.Wood:
@@ -78,7 +74,6 @@ public class ShopItem : MonoBehaviour, IPointerClickHandler
 
     private void UpdateWood()
     {
-        SetAvailable(true);
 
         if (TempDataHolder.CurrentCurrency >= Data.Price && 
             TempDataHolder.MaxLife - TempDataHolder.CurrentLife > 0)
@@ -93,10 +88,9 @@ public class ShopItem : MonoBehaviour, IPointerClickHandler
 
     private void UpdateWoodBundle()
     {
-        SetAvailable(true);
 
         if (TempDataHolder.CurrentCurrency >= Data.Price &&
-            TempDataHolder.MaxLife - TempDataHolder.CurrentLife > 1)
+            TempDataHolder.MaxLife - TempDataHolder.CurrentLife > 0)
         {
             SetPurchasable(true);
         }
@@ -108,7 +102,6 @@ public class ShopItem : MonoBehaviour, IPointerClickHandler
 
     private void UpdateRam()
     {
-        SetAvailable(true);
 
         if (TempDataHolder.CurrentCurrency >= Data.Price &&
             !TempDataHolder.HasRam)
@@ -123,7 +116,6 @@ public class ShopItem : MonoBehaviour, IPointerClickHandler
 
     private void UpdateHelmet()
     {
-        SetAvailable(true);
 
         if (TempDataHolder.CurrentCurrency >= Data.Price &&
             !TempDataHolder.HasHelmet)
@@ -138,7 +130,6 @@ public class ShopItem : MonoBehaviour, IPointerClickHandler
 
     private void UpdateNet()
     {
-        SetAvailable(true);
 
         if (TempDataHolder.CurrentCurrency >= Data.Price &&
              !TempDataHolder.HasNet)
@@ -150,4 +141,52 @@ public class ShopItem : MonoBehaviour, IPointerClickHandler
             SetPurchasable(false);
         }
     }
+
+
+    public void OnPurchase()
+    {
+        TempDataHolder.CurrentCurrency -= Data.Price;
+
+        switch (Data.Enum)
+        {
+            case ItemEnums.Wood:
+                OnPurchaseWood();
+                break;
+            case ItemEnums.WoodBundle:
+                OnPurchaseWoodBundle();
+                break;
+            case ItemEnums.Net:
+                OnPurchaseNet();
+                break;
+            case ItemEnums.Helmet:
+                OnPurchaseHelmet();
+                break;
+            case ItemEnums.MetalRam:
+                OnPurchaseMetalRam();
+                break;
+        }
+
+        SetAvailable(false);
+    }
+    private void OnPurchaseWood()
+    {
+        TempDataHolder.CurrentLife += 1;
+    }
+    private void OnPurchaseWoodBundle()
+    {
+        TempDataHolder.CurrentLife += 2;
+    }
+    private void OnPurchaseNet()
+    {
+        TempDataHolder.HasNet = true;
+    }
+    private void OnPurchaseMetalRam()
+    {
+        TempDataHolder.HasRam = true;
+    }
+    private void OnPurchaseHelmet()
+    {
+        TempDataHolder.HasHelmet = true;
+    }
+
 }
