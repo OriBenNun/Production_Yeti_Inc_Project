@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd2efff1c5a8fc4ea74904d8fb1749b, type: 3}
   m_Name: Net
   m_EditorClassIdentifier: 
-  <Enum>k__BackingField: 0
-  <Name>k__BackingField: Wood
-  <Price>k__BackingField: 0
+  <Enum>k__BackingField: 2
+  <Name>k__BackingField: Net
+  <Price>k__BackingField: 275
   <Description>k__BackingField: 'Saves ice packs falling from ship '

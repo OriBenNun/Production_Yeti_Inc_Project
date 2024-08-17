@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Enum>k__BackingField: 1
   <Name>k__BackingField: Wood Bundle
-  <Price>k__BackingField: 0
+  <Price>k__BackingField: 250
   <Description>k__BackingField: Repair two ship lives

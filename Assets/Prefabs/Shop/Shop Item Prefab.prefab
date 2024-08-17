@@ -88,4 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e6cc1d2e02808a48a3402699aed3bea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _itemImage: {fileID: 391961774603106183}
   _itemData: {fileID: 0}
+  NormalColor: {r: 1, g: 1, b: 1, a: 1}
+  BlockedColor: {r: 0.35, g: 0.35, b: 0.35, a: 1}
