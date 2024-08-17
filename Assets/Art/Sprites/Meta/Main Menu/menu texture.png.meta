@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8612fd4b97d923344aaffc928325db13
+guid: f350dd76ae5be5846a2d2044456cdb92
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3677999224111530534
-    second: ice block_0
+      213: -2769275436308991008
+    second: main menu no icons_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ice block_0
+      name: main menu no icons_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 7
-        width: 332
-        height: 154
+        x: 0
+        y: 0
+        width: 1290
+        height: 2796
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: add7baa413f15fcc0800000000000000
-      internalID: -3677999224111530534
+      spriteID: 0e37695b9ae8199d0800000000000000
+      internalID: -2769275436308991008
       vertices: []
       indices: 
       edges: []
@@ -145,7 +145,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      main menu no icons_0: -2769275436308991008
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
