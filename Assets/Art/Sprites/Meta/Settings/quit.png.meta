@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8ba895183c663be4ba4950d0fd39176d
+guid: 21f2a72768a1d164e949c0d6610c1470
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4945427272589221396
-    second: Simple_Music.svg_0
+      213: 5398283193359031274
+    second: quit_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Simple_Music.svg_0
+      name: quit_0
       rect:
         serializedVersion: 2
-        x: 75
+        x: 2
         y: 0
-        width: 1850
-        height: 2000
+        width: 469
+        height: 188
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ce16acaf8105e5bb0800000000000000
-      internalID: -4945427272589221396
+      spriteID: aeb502986fd8aea40800000000000000
+      internalID: 5398283193359031274
       vertices: []
       indices: 
       edges: []
@@ -145,8 +145,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Simple_Music.svg_0: -4945427272589221396
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
