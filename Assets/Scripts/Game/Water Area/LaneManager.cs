@@ -25,6 +25,7 @@ namespace Game.Water_Area
     {
         Left,
         Center,
-        Right
+        Right,
+        None
     }
 }
