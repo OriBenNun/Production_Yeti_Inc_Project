@@ -617,6 +617,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Water_Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8541268798424103660, guid: 6f4eef53f7c40c5418f6b039b51a8482, type: 3}
+      propertyPath: simulationSpeed
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8541268798424103660, guid: 6f4eef53f7c40c5418f6b039b51a8482, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
