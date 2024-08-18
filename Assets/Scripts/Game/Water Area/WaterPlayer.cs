@@ -17,13 +17,23 @@ namespace Game.Water_Area
 
         public static event Action<WaterAreaStopIsland> OnPlayerReachedIsland;
         
-        private int _currentLives;
+        public static int Lives { get; private set; }
         
         private Coroutine _moveCoroutine;
         
         private void Awake()
         {
-            _currentLives = startingLives;
+            if (Lives == 0)
+            { 
+                Lives = startingLives;
+            }
+
+            GameLoopManager.OnGameQuited += HandleOnGameQuited;
+        }
+
+        private void OnDestroy()
+        {
+            GameLoopManager.OnGameQuited -= HandleOnGameQuited;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -31,10 +41,10 @@ namespace Game.Water_Area
             if (!other.TryGetComponent(out Obstacle obstacle)) return;
             
             obstacle.Disable();
-            _currentLives--;
-            OnPlayerGotHit?.Invoke(_currentLives);
+            Lives--;
+            OnPlayerGotHit?.Invoke(Lives);
 
-            if (_currentLives != 0) return;
+            if (Lives != 0) return;
             
             gameObject.SetActive(false);
             OnPlayerDied?.Invoke();
@@ -85,6 +95,11 @@ namespace Game.Water_Area
             }
             
             OnPlayerReachedIsland?.Invoke(island);
+        }
+        
+        private void HandleOnGameQuited()
+        {
+            Lives = startingLives;
         }
     }
 }

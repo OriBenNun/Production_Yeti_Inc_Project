@@ -19,7 +19,7 @@ namespace Game.Water_Area
         private bool _isDragging;
         
         private bool _isDisabled;
-
+        
         private void Start()
         {
             _currentLane = lanes[1];
