@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8f54273d2327bdb4dbd88d2beb2944af
+guid: 356475557ac3ab84195d6684ab9eb268
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2108923317121174834
-    second: Pause ice_0
+      213: -6205658711386682026
+    second: Net_Shop_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Pause ice_0
+      name: Net_Shop_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 262
-        height: 302
+        width: 179
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ec23478aa699bb2e0800000000000000
-      internalID: -2108923317121174834
+      spriteID: 65d0d7ee74211e9a0800000000000000
+      internalID: -6205658711386682026
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -146,7 +146,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Pause ice_0: -2108923317121174834
+      Net_Shop_0: -6205658711386682026
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
