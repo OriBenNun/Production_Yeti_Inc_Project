@@ -11,7 +11,7 @@ namespace Game.Water_Area
         {
             WaterPlayer.OnPlayerGotHit += UpdateLives;
         
-            UpdateLives(livesParents.Count);
+            UpdateLives(WaterPlayer.Lives);
         }
     
         private void OnDestroy()

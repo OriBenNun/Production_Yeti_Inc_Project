@@ -145,7 +145,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      leaderboard icon_0: -3824458860046227494
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
