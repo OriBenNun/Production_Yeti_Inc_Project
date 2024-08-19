@@ -272,6 +272,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Obstacle Foam Particles
       objectReference: {fileID: 0}
+    - target: {fileID: 8864917179039941726, guid: 67bc79a237abb8f48971d86da3e42f6e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
