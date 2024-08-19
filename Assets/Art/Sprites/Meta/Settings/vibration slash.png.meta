@@ -145,7 +145,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      vibration slash_0: 19697321852927127
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
