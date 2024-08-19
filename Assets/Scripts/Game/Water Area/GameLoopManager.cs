@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Game.Water_Area.Obstacles;
 using UnityEngine;
@@ -17,14 +18,19 @@ namespace Game.Water_Area
         [SerializeField] private float initialObstacleSpeed = 2.6f;
         [SerializeField] private float initialSpawnCooldown = 1.4f;
         [SerializeField] private float minimumSpawnCooldown = 0.4f;
+        [SerializeField] private int initialDistancePerSecond = 71;
+        [SerializeField] private float distancePerSecondMultiplierPerIceChoppingIslandStop = 0.5f;
         [SerializeField] private float obstacleSpeedMultiplierPerIceChoppingIslandStop = 0.5f;
         [SerializeField] private float timeBetweenMultiplierPerIceChoppingIslandStop = 0.5f;
         [SerializeField] private float spawnCooldownMultiplierPerIceChoppingIslandStop = 0.2f;
 
         [SerializeField] private WaterAreaCharacterController waterAreaCharacterController;
         [SerializeField] private WaterPlayer waterPlayer;
-        
+
+        public static event Action OnGameQuited;
         // private float _timeFromStart;
+        
+        public static int DistanceTraveled { get; private set; }
         
         private static int _iceChoppingIslandStops = 0;
         
@@ -43,6 +49,14 @@ namespace Game.Water_Area
             StartCoroutine(StartGameSequence());
         }
 
+        private void Update()
+        {
+            if (Time.timeScale == 0) { return; }
+            
+            DistanceTraveled += initialDistancePerSecond +
+                                Mathf.CeilToInt(_iceChoppingIslandStops * distancePerSecondMultiplierPerIceChoppingIslandStop * Time.deltaTime);
+        }
+
         private void OnDestroy()
         {
             Time.timeScale = 1.0f;
@@ -55,6 +69,8 @@ namespace Game.Water_Area
         {
             Time.timeScale = 1.0f;
             _iceChoppingIslandStops = 0;
+            DistanceTraveled = 0;
+            OnGameQuited?.Invoke();
             SceneTransitionHandler.LoadGameSceneAsync();
         }
         
@@ -62,6 +78,8 @@ namespace Game.Water_Area
         {
             Time.timeScale = 1.0f;
             _iceChoppingIslandStops = 0;
+            DistanceTraveled = 0;
+            OnGameQuited?.Invoke();
             SceneTransitionHandler.LoadMetaSceneAsync();
         }
         

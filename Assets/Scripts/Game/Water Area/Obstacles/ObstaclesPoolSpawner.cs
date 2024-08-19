@@ -10,14 +10,21 @@ namespace Game.Water_Area.Obstacles
         [SerializeField] private Obstacle obstaclePrefab;
         [SerializeField] private int initialPoolSize = 50;
         [SerializeField] private WaterAreaCharacterController waterAreaCharacterController;
-
+        [SerializeField] private int maxObstaclesInLane = 3;
+        
         private List<Sprite> _obstacleSprites;
 
         private Coroutine _spawnRandomObstaclesWithCooldown;
-
+        
+        private LanePosition _lanePositionInCooldown = LanePosition.None;
+        private LanePosition _previousLanePosition = LanePosition.None;
+        private int _sameLaneCount;
+        
         private void Awake()
         {
             InitPool(initialPoolSize, obstaclePrefab, transform);
+
+            _sameLaneCount = 0;
         }
 
         public void StartSpawningRandomObstacles(float spawnCooldown, List<Sprite> obstaclesSprites, float speed)
@@ -49,7 +56,45 @@ namespace Game.Water_Area.Obstacles
             while (true)
             {
                 yield return new WaitForSeconds(cooldown);
+                
                 var lane = waterAreaCharacterController.GetRandomLane();
+                
+                if (_lanePositionInCooldown == lane.GetLanePositionType())
+                {
+                    while (_lanePositionInCooldown == lane.GetLanePositionType())
+                    {
+                        lane = waterAreaCharacterController.GetRandomLane();
+                        yield return null;
+                    }
+
+                    _lanePositionInCooldown = LanePosition.None;
+                }
+                
+                if (lane.GetLanePositionType() == _previousLanePosition)
+                {
+                    if (_sameLaneCount >= maxObstaclesInLane)
+                    {
+                        var newLane = waterAreaCharacterController.GetRandomLane();
+                        while (newLane.GetLanePositionType() == _previousLanePosition)
+                        {
+                            newLane = waterAreaCharacterController.GetRandomLane();
+                            yield return null;
+                        }
+                        _lanePositionInCooldown = lane.GetLanePositionType();
+                        _sameLaneCount = 1;
+                        lane = newLane;
+                    }
+                    else
+                    {
+                        _sameLaneCount++;
+                    }
+                }
+                else
+                {
+                    _sameLaneCount = 1;
+                }
+
+                _previousLanePosition = lane.GetLanePositionType();
                 SpawnNewObstacle(lane, speed);
             }
         }
