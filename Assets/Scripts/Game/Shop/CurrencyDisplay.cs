@@ -1,13 +1,16 @@
 using TMPro;
 using UnityEngine;
 
-public class CurrencyDisplay : MonoBehaviour
+namespace Game.Shop
 {
-    [SerializeField] private TMP_Text _currencyText;
-
-
-    public void UpdateCurrencyText(int currency)
+    public class CurrencyDisplay : MonoBehaviour
     {
-        _currencyText.text = currency.ToString();
+        [SerializeField] private TMP_Text _currencyText;
+
+
+        public void UpdateCurrencyText(int currency)
+        {
+            _currencyText.text = currency.ToString();
+        }
     }
 }

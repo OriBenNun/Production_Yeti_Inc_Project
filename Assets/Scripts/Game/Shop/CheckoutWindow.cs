@@ -1,45 +1,48 @@
 using TMPro;
 using UnityEngine;
 
-public class CheckoutWindow : MonoBehaviour
+namespace Game.Shop
 {
-    [SerializeField] private TMP_Text _nameText;
-    [SerializeField] private TMP_Text _descText;
-    [SerializeField] private TMP_Text _priceText;
-
-    private ShopItem _shopItem;
-    private ShopManager _shopManager;
-
-    public void Init(ShopManager shopManager)
+    public class CheckoutWindow : MonoBehaviour
     {
-        _shopManager = shopManager;
-        gameObject.SetActive(false);
-    }
+        [SerializeField] private TMP_Text _nameText;
+        [SerializeField] private TMP_Text _descText;
+        [SerializeField] private TMP_Text _priceText;
 
-    public void StartCheckout(ShopItem shopItem)
-    {
-        _shopItem = shopItem;
+        private ShopItem _shopItem;
+        private ShopManager _shopManager;
 
-        _nameText.text = _shopItem.Data.Name;
-        _descText.text = _shopItem.Data.Description;
-        _priceText.text = _shopItem.Data.Price.ToString();
+        public void Init(ShopManager shopManager)
+        {
+            _shopManager = shopManager;
+            gameObject.SetActive(false);
+        }
+
+        public void StartCheckout(ShopItem shopItem)
+        {
+            _shopItem = shopItem;
+
+            _nameText.text = _shopItem.Data.Name;
+            _descText.text = _shopItem.Data.Description;
+            _priceText.text = _shopItem.Data.Price.ToString();
     
-        gameObject.SetActive(true);
+            gameObject.SetActive(true);
+        }
+
+        public void OnConfirm()
+        {
+            _shopItem.OnPurchase();
+            _shopManager.OnPurchase();
+            gameObject.SetActive(false);
+        }
+
+        public void OnCancel()
+        {
+            gameObject.SetActive(false);
+        }
+
+
+
+
     }
-
-    public void OnConfirm()
-    {
-        _shopItem.OnPurchase();
-        _shopManager.OnPurchase();
-        gameObject.SetActive(false);
-    }
-
-    public void OnCancel()
-    {
-        gameObject.SetActive(false);
-    }
-
-
-
-
 }
