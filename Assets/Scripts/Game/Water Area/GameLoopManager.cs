@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Game.Shop;
 using Game.Water_Area.Obstacles;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -42,6 +43,8 @@ namespace Game.Water_Area
             WaterPlayer.OnPlayerDied += WaterPlayerOnPlayerDied;
             WaterPlayer.OnPlayerReachedIsland += HandleOnPlayerReachedIsland;
             IceChoppingIslandsManager.OnIceChoppingIslandStopped += HandleOnIceChoppingIslandStopped;
+            
+            OnGameQuited += CurrentRunDataHandler.Reset;
         }
 
         private void Start()
@@ -63,6 +66,8 @@ namespace Game.Water_Area
             WaterPlayer.OnPlayerDied -= WaterPlayerOnPlayerDied;
             WaterPlayer.OnPlayerReachedIsland -= HandleOnPlayerReachedIsland;
             IceChoppingIslandsManager.OnIceChoppingIslandStopped -= HandleOnIceChoppingIslandStopped;
+            
+            OnGameQuited -= CurrentRunDataHandler.Reset;
         }
 
         public void ReloadGameScene()

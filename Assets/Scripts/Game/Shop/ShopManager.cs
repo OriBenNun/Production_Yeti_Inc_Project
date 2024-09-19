@@ -1,41 +1,46 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopManager : MonoBehaviour
+namespace Game.Shop
 {
-    [SerializeField] private CheckoutWindow _checkoutWindow;
-    [SerializeField] private CurrencyDisplay _currencyDisplay;
-    [SerializeField] private List<ShopItem> _items;
-
-    // Replace this with the way to get and set the currency in the game.
-    public int CurrentCurrency { get { return TempDataHolder.CurrentCurrency; } }
-
-    private void Awake()
+    public class ShopManager : MonoBehaviour
     {
-        TempDataHolder.Init();
-        _checkoutWindow.Init(this);
-        foreach (ShopItem item in _items)
+        [SerializeField] private CheckoutWindow _checkoutWindow;
+        [SerializeField] private CurrencyDisplay _currencyDisplay;
+        [SerializeField] private List<ShopItem> _items;
+
+        // Replace this with the way to get and set the currency in the game.
+        public int CurrentCurrency { get { return CurrentRunDataHandler.CurrentCurrency; } }
+
+        private void Awake()
         {
-            item.Init(this);
-            item.SetAvailable(true);
+            if (!CurrentRunDataHandler.HasInitialized)
+            {
+                CurrentRunDataHandler.Init();
+            }
+            _checkoutWindow.Init(this);
+            foreach (ShopItem item in _items)
+            {
+                item.Init(this);
+                item.SetAvailable(true);
+            }
+
+            _currencyDisplay.UpdateCurrencyText(CurrentCurrency);
         }
 
-        _currencyDisplay.UpdateCurrencyText(CurrentCurrency);
-    }
 
-
-    public void OpenCheckout(ShopItem item)
-    {
-        _checkoutWindow.StartCheckout(item);
-    }
-
-    internal void OnPurchase()
-    {
-        _currencyDisplay.UpdateCurrencyText(CurrentCurrency);
-        foreach(ShopItem item in _items)
+        public void OpenCheckout(ShopItem item)
         {
-            item.UpdateState();
+            _checkoutWindow.StartCheckout(item);
+        }
+
+        internal void OnPurchase()
+        {
+            _currencyDisplay.UpdateCurrencyText(CurrentCurrency);
+            foreach(ShopItem item in _items)
+            {
+                item.UpdateState();
+            }
         }
     }
 }
