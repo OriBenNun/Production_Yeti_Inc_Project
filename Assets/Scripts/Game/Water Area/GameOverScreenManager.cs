@@ -1,16 +1,23 @@
+using System;
+using TMPro;
 using UnityEngine;
 
-public class GameOverScreenManager : MonoBehaviour
+namespace Game.Water_Area
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class GameOverScreenManager : MonoBehaviour
     {
+        [SerializeField] private TMP_Text distanceText;
+        [SerializeField] private TMP_Text timeText;
+        [SerializeField] private TMP_Text iceCubesText;
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void OnEnable()
+        {
+            distanceText.text = $"Distance: {CurrentRunDataHandler.DistanceTraveled}m";
+            
+            var timeInMinutes = CurrentRunDataHandler.CurrentRunTime / 60;
+            timeText.text = $"Time Played: {timeInMinutes:F1} min(s)";
+            
+            iceCubesText.text = $"Ice Cubes Collected: {CurrentRunDataHandler.CurrentCurrency}";
+        }
     }
 }

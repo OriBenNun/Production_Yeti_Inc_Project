@@ -19,6 +19,9 @@ namespace Game
             get => _currentLife;
             set => _currentLife = Mathf.Clamp(value, 0, MaxLife);
         }
+        
+        public static int DistanceTraveled { get; set; }
+        public static float CurrentRunTime { get; set; }
 
         public static int MaxLife => 4;
         public static bool HasHelmet { get; set; }
@@ -26,7 +29,7 @@ namespace Game
         public static bool HasNet { get; set; }
         
         public static bool HasInitialized { get; private set; }
-        
+
         private const int _initialCurrency = 0;
         private const int _initialLife = 4;
         private const int _currencyToLoseOnObstacleHit = 20;
@@ -35,6 +38,8 @@ namespace Game
         {
             CurrentCurrency = _initialCurrency;
             CurrentLife = _initialLife;
+            DistanceTraveled = 0;
+            CurrentRunTime = 0;
 
             HasHelmet = false;
             HasRam = false;

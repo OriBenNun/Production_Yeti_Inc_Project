@@ -31,8 +31,6 @@ namespace Game.Water_Area
         public static event Action OnGameQuited;
         // private float _timeFromStart;
         
-        public static int DistanceTraveled { get; private set; }
-        
         private static int _iceChoppingIslandStops = 0;
         
         private void Awake()
@@ -61,7 +59,7 @@ namespace Game.Water_Area
         {
             if (Time.timeScale == 0) { return; }
             
-            DistanceTraveled += initialDistancePerSecond +
+            CurrentRunDataHandler.DistanceTraveled += initialDistancePerSecond +
                                 Mathf.CeilToInt(_iceChoppingIslandStops * distancePerSecondMultiplierPerIceChoppingIslandStop * Time.deltaTime);
         }
 
@@ -79,7 +77,6 @@ namespace Game.Water_Area
         {
             Time.timeScale = 1.0f;
             _iceChoppingIslandStops = 0;
-            DistanceTraveled = 0;
             OnGameQuited?.Invoke();
             SceneTransitionHandler.LoadGameSceneAsync();
         }
@@ -88,7 +85,6 @@ namespace Game.Water_Area
         {
             Time.timeScale = 1.0f;
             _iceChoppingIslandStops = 0;
-            DistanceTraveled = 0;
             OnGameQuited?.Invoke();
             SceneTransitionHandler.LoadMetaSceneAsync();
         }

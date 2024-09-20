@@ -9,7 +9,7 @@ namespace Game.Water_Area
 
         private void LateUpdate()
         {
-            distanceTraveledText.text = GameLoopManager.DistanceTraveled.ToString("N0");
+            distanceTraveledText.text = $"{CurrentRunDataHandler.DistanceTraveled:N0}m";
         }
     }
 }
