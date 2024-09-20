@@ -12,7 +12,7 @@ namespace Game
         
         public static bool HasInitialized { get; private set; }
         
-        private const int _initialCurrency = 5000;
+        private const int _initialCurrency = 0;
         private const int _initialLife = 4;
 
 
@@ -21,7 +21,7 @@ namespace Game
             CurrentCurrency = _initialCurrency;
             CurrentLife = _initialLife;
 
-            HasHelmet = true;
+            HasHelmet = false;
             HasRam = false;
             HasNet = false;
             
