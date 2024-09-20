@@ -13,7 +13,7 @@ namespace Game.Water_Area
         [SerializeField] private Canvas pauseCanvas;
 
         [SerializeField] private ObstaclesManager obstaclesManager;
-        [SerializeField] private IceChoppingIslandsManager iceChoppingIslandsManager;
+        [FormerlySerializedAs("iceChoppingIslandsManager")] [SerializeField] private StopIslandsManager stopIslandsManager;
         [SerializeField] private float timeUntilObstaclesStop = 5f;
         [SerializeField] private float timeBetweenObstaclesStopAndChoppingIslandSpawn = 1f;
         [SerializeField] private float initialObstacleSpeed = 2.6f;
@@ -45,7 +45,7 @@ namespace Game.Water_Area
             
             WaterPlayer.OnPlayerDied += WaterPlayerOnPlayerDied;
             WaterPlayer.OnPlayerReachedIsland += HandleOnPlayerReachedIsland;
-            IceChoppingIslandsManager.OnIceChoppingIslandStopped += HandleOnIceChoppingIslandStopped;
+            StopIslandsManager.OnIceChoppingIslandStopped += HandleOnIceChoppingIslandStopped;
             
             OnGameQuited += CurrentRunDataHandler.Reset;
         }
@@ -68,7 +68,7 @@ namespace Game.Water_Area
             Time.timeScale = 1.0f;
             WaterPlayer.OnPlayerDied -= WaterPlayerOnPlayerDied;
             WaterPlayer.OnPlayerReachedIsland -= HandleOnPlayerReachedIsland;
-            IceChoppingIslandsManager.OnIceChoppingIslandStopped -= HandleOnIceChoppingIslandStopped;
+            StopIslandsManager.OnIceChoppingIslandStopped -= HandleOnIceChoppingIslandStopped;
             
             OnGameQuited -= CurrentRunDataHandler.Reset;
         }
@@ -114,7 +114,7 @@ namespace Game.Water_Area
             
             yield return new WaitForSeconds(timeBetweenObstaclesStopAndChoppingIslandSpawn);
             
-            iceChoppingIslandsManager.SpawnIsland();
+            stopIslandsManager.SpawnIsland();
         }
         
         private void HandleOnIceChoppingIslandStopped(IceChoppingIsland island)

@@ -1,12 +1,13 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Water_Area
 {
-    public class IceChoppingIslandsManager : MonoBehaviour
+    public class StopIslandsManager : MonoBehaviour
     {
         [SerializeField] private WaterAreaCharacterController waterAreaCharacterController;
-        [SerializeField] private IceChoppingIsland islandPrefab;
+        [FormerlySerializedAs("islandPrefab")] [SerializeField] private IceChoppingIsland iceChoppingIslandPrefab;
         [SerializeField] private float yPositionToStop = 4f;
         [SerializeField] private float islandSpeed = 1f;
 
@@ -27,18 +28,16 @@ namespace Game.Water_Area
         public void SpawnIsland()
         {
             var laneToSpawn = waterAreaCharacterController.GetRandomEdgeLane();
-            _instantiatedIsland = Instantiate(islandPrefab, laneToSpawn.GetObstacleSpawnPosition(), Quaternion.identity);
-            _instantiatedIsland.Init(islandSpeed, yPositionToStop, laneToSpawn);
+            _instantiatedIsland = Instantiate(iceChoppingIslandPrefab, laneToSpawn.GetObstacleSpawnPosition(), Quaternion.identity);
+            _instantiatedIsland.Init(islandSpeed, yPositionToStop);
         }
         
         private void OnIslandStopped(WaterAreaStopIsland island)
         {
-            if (island is not IceChoppingIsland choppingIsland)
+            if (island is IceChoppingIsland choppingIsland)
             {
-                return;
+                OnIceChoppingIslandStopped?.Invoke(choppingIsland);
             }
-            
-            OnIceChoppingIslandStopped?.Invoke(choppingIsland);
         }
     }
 }

@@ -788,7 +788,7 @@ GameObject:
   - component: {fileID: 294660651}
   - component: {fileID: 294660652}
   m_Layer: 0
-  m_Name: IceChoppingIslandsManager
+  m_Name: StopIslandsManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -822,7 +822,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waterAreaCharacterController: {fileID: 1095114999}
-  islandPrefab: {fileID: 5880338362348778301, guid: 97dc01bb554a36b43a5b51d419ebef18, type: 3}
+  iceChoppingIslandPrefab: {fileID: 5880338362348778301, guid: 97dc01bb554a36b43a5b51d419ebef18, type: 3}
   yPositionToStop: 1
   islandSpeed: 2
 --- !u!1 &321886650
@@ -3189,7 +3189,7 @@ MonoBehaviour:
   gameOverCanvas: {fileID: 1517918601}
   pauseCanvas: {fileID: 1718481203}
   obstaclesManager: {fileID: 79191390}
-  iceChoppingIslandsManager: {fileID: 294660652}
+  stopIslandsManager: {fileID: 294660652}
   timeUntilObstaclesStop: 15
   timeBetweenObstaclesStopAndChoppingIslandSpawn: 0.3
   initialObstacleSpeed: 2.6
