@@ -37,6 +37,11 @@ namespace Game.Water_Area
         
         private void Awake()
         {
+            if (!CurrentRunDataHandler.HasInitialized)
+            {
+                CurrentRunDataHandler.Init();
+            }
+
             gameOverCanvas.gameObject.SetActive(false);
             Time.timeScale = 1.0f;
             

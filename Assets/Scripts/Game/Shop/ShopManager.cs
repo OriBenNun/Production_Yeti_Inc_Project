@@ -14,10 +14,8 @@ namespace Game.Shop
 
         private void Awake()
         {
-            if (!CurrentRunDataHandler.HasInitialized)
-            {
-                CurrentRunDataHandler.Init();
-            }
+            
+
             _checkoutWindow.Init(this);
             foreach (ShopItem item in _items)
             {

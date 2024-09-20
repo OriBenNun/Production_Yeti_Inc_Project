@@ -69,7 +69,6 @@ namespace Game.Ice_Picking
             _iceBlockPool.Init();
             _player.SetCurrentSide(_startingSide);
             InitPillar();
-
         }
 
         public void ChopAction(Sides side)

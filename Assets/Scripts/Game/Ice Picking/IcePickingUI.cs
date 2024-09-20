@@ -20,8 +20,7 @@ namespace Game.Ice_Picking
             _iceCounter.text = string.Empty;
             _tapPrompt.gameObject.SetActive(true);
 
-            if(_manager.Defense > 0)
-                _helmetImage.gameObject.SetActive(true);
+            _helmetImage.gameObject.SetActive(_manager.Defense > 0);
         }
 
         private void OnDisable()
