@@ -1,9 +1,19 @@
+using UnityEngine;
+
 namespace Game
 {
     public static class CurrentRunDataHandler
     {
         public static int CurrentCurrency {  get; set; }
-        public static int CurrentLife {  get; set; }
+
+        private static int _currentLife;
+
+        public static int CurrentLife
+        {
+            get { return _currentLife; }
+            set { _currentLife = Mathf.Clamp(value, 0, MaxLife); }
+        }
+
         public static int MaxLife => 4;
         public static bool HasHelmet { get; set; }
         public static bool HasRam { get; set; }
