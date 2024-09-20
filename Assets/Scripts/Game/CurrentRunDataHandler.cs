@@ -1,9 +1,14 @@
+using Game.Ice_Picking;
+using System;
 using UnityEngine;
 
 namespace Game
 {
     public static class CurrentRunDataHandler
     {
+        public static event Action<int> OnCurrerntCurrencyChanged;
+
+
         public static int CurrentCurrency {  get; set; }
 
         private static int _currentLife;
@@ -36,11 +41,23 @@ namespace Game
             HasNet = false;
             
             HasInitialized = true;
+
+            OnCurrerntCurrencyChanged?.Invoke(CurrentCurrency);
+            IcePickingCompletionManager.OnIcePickingComplete += HandleOnIcePickingComplete;
+        
+        }
+
+        private static void HandleOnIcePickingComplete(int iceCubes)
+        {
+            CurrentCurrency += iceCubes;
+            OnCurrerntCurrencyChanged?.Invoke(CurrentCurrency);
         }
 
         public static void Reset()
         {
             HasInitialized = false;
+
+            IcePickingCompletionManager.OnIcePickingComplete -= HandleOnIcePickingComplete;
         }
     }
 }

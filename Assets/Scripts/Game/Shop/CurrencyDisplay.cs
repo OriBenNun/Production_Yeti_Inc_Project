@@ -7,6 +7,15 @@ namespace Game.Shop
     {
         [SerializeField] private TMP_Text _currencyText;
 
+        public void Awake()
+        {
+            CurrentRunDataHandler.OnCurrerntCurrencyChanged += UpdateCurrencyText;
+        }
+
+        public void OnDestroy()
+        {
+            CurrentRunDataHandler.OnCurrerntCurrencyChanged -= UpdateCurrencyText;
+        }
 
         public void UpdateCurrencyText(int currency)
         {
