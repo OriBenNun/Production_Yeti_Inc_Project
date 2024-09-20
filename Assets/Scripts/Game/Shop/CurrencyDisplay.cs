@@ -10,6 +10,8 @@ namespace Game.Shop
         public void Awake()
         {
             CurrentRunDataHandler.OnCurrerntCurrencyChanged += UpdateCurrencyText;
+
+            UpdateCurrencyText(CurrentRunDataHandler.CurrentCurrency);
         }
 
         public void OnDestroy()
