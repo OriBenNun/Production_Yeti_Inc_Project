@@ -8,7 +8,7 @@ namespace Game.Water_Area
     {
         public static event Action<WaterAreaStopIsland> OnIslandStopped;
 
-        protected void Init(float speed,float yPositionToStop)
+        public void Init(float speed,float yPositionToStop)
         {
             StartCoroutine(MoveDownwardsUntilStop(speed, yPositionToStop));
         }
