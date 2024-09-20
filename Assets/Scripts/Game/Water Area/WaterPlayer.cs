@@ -7,44 +7,25 @@ namespace Game.Water_Area
 {
     public class WaterPlayer : MonoBehaviour
     {
-        [SerializeField] private int startingLives = 5;
         [SerializeField] private float moveSpeed = 1.0f;
         [SerializeField] private float moveToIslandSpeed = 0.5f;
         [SerializeField] private float moveToIslandDestinationShift = 0.5f;
         
-        public static event Action<int> OnPlayerGotHit;
+        public static event Action OnPlayerGotHit;
         public static event Action OnPlayerDied;
 
         public static event Action<WaterAreaStopIsland> OnPlayerReachedIsland;
         
-        public static int Lives { get; private set; }
-        
         private Coroutine _moveCoroutine;
-        
-        private void Awake()
-        {
-            if (Lives == 0)
-            { 
-                Lives = startingLives;
-            }
-
-            GameLoopManager.OnGameQuited += HandleOnGameQuited;
-        }
-
-        private void OnDestroy()
-        {
-            GameLoopManager.OnGameQuited -= HandleOnGameQuited;
-        }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (!other.TryGetComponent(out Obstacle obstacle)) return;
             
             obstacle.Disable();
-            Lives--;
-            OnPlayerGotHit?.Invoke(Lives);
+            OnPlayerGotHit?.Invoke();
 
-            if (Lives != 0) return;
+            if (CurrentRunDataHandler.CurrentLife > 0) return;
             
             gameObject.SetActive(false);
             OnPlayerDied?.Invoke();
@@ -95,11 +76,6 @@ namespace Game.Water_Area
             }
             
             OnPlayerReachedIsland?.Invoke(island);
-        }
-        
-        private void HandleOnGameQuited()
-        {
-            Lives = startingLives;
         }
     }
 }

@@ -9,14 +9,17 @@ namespace Game.Water_Area
 
         private void Awake()
         {
-            WaterPlayer.OnPlayerGotHit += UpdateLives;
+            CurrentRunDataHandler.OnCurrentLifeChanged += UpdateLives;
+        }
         
-            UpdateLives(WaterPlayer.Lives);
+        private void Start()
+        {
+            UpdateLives(CurrentRunDataHandler.CurrentLife);
         }
     
         private void OnDestroy()
         {
-            WaterPlayer.OnPlayerGotHit -= UpdateLives;
+            CurrentRunDataHandler.OnCurrentLifeChanged -= UpdateLives;
         }
 
         private void UpdateLives(int lives)
