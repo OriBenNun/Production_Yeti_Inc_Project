@@ -4032,7 +4032,7 @@ MonoBehaviour:
   pauseCanvas: {fileID: 1718481203}
   obstaclesManager: {fileID: 79191390}
   stopIslandsManager: {fileID: 294660652}
-  timeUntilObstaclesStopAndIslandSpawn: 7
+  timeUntilObstaclesStopAndIslandSpawn: 30
   timeBetweenObstaclesStopAndIslandSpawn: 0.3
   initialObstacleSpeed: 2.6
   initialSpawnCooldown: 1.4
