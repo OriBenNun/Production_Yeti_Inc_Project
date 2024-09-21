@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Game.Water_Area.Obstacles;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 
 namespace Game.Water_Area
@@ -10,6 +11,7 @@ namespace Game.Water_Area
         [SerializeField] private float moveSpeed = 1.0f;
         [SerializeField] private float moveToIslandSpeed = 0.5f;
         [SerializeField] private float moveToIslandDestinationShift = 0.5f;
+        [SerializeField] private MMF_Player gotHitFeedback;
         
         public static event Action OnPlayerGotHit;
         public static event Action OnPlayerDied;
@@ -24,6 +26,7 @@ namespace Game.Water_Area
             
             obstacle.Disable();
             OnPlayerGotHit?.Invoke();
+            gotHitFeedback?.PlayFeedbacks();
 
             if (CurrentRunDataHandler.CurrentLife > 0) return;
             
