@@ -9,8 +9,9 @@ namespace Game
     {
         public static event Action<int> OnCurrentCurrencyChanged;
         public static event Action<int> OnCurrentLifeChanged;
-        
-        public static int CurrentCurrency {  get; set; }
+        public static event Action OnBoughtItemsChanged;
+
+        public static int CurrentCurrency { get; set; }
 
         private static int _currentLife;
 
@@ -19,7 +20,7 @@ namespace Game
             get => _currentLife;
             set => _currentLife = Mathf.Clamp(value, 0, MaxLife);
         }
-        
+
         public static int DistanceTraveled { get; set; }
         public static float CurrentRunTime { get; set; }
 
@@ -27,13 +28,13 @@ namespace Game
         public static bool HasHelmet { get; set; }
         public static bool HasRam { get; set; }
         public static bool HasNet { get; set; }
-        
+
         public static bool HasInitialized { get; private set; }
 
         private const int _initialCurrency = 0;
         private const int _initialLife = 4;
         private const int _currencyToLoseOnObstacleHit = 20;
-        
+
         public static void Init()
         {
             CurrentCurrency = _initialCurrency;
@@ -44,12 +45,12 @@ namespace Game
             HasHelmet = false;
             HasRam = false;
             HasNet = false;
-            
+
             HasInitialized = true;
 
             OnCurrentCurrencyChanged?.Invoke(CurrentCurrency);
             IcePickingCompletionManager.OnIcePickingComplete += HandleOnIcePickingComplete;
-            
+
             WaterPlayer.OnPlayerGotHit += HandleOnPlayerGotHit;
         }
 
@@ -60,7 +61,7 @@ namespace Game
             IcePickingCompletionManager.OnIcePickingComplete -= HandleOnIcePickingComplete;
             WaterPlayer.OnPlayerGotHit -= HandleOnPlayerGotHit;
         }
-        
+
         private static void HandleOnIcePickingComplete(int iceCubes)
         {
             CurrentCurrency += iceCubes;
@@ -69,13 +70,29 @@ namespace Game
 
         private static void HandleOnPlayerGotHit()
         {
-            CurrentLife = Math.Max(CurrentLife - 1, 0);
-            OnCurrentLifeChanged?.Invoke(CurrentLife);
-            
+            if (HasRam)
+            {
+                HasRam = false;
+                OnBoughtItemsChanged?.Invoke();
+            }
+            else
+            {
+                CurrentLife = Math.Max(CurrentLife - 1, 0);
+                OnCurrentLifeChanged?.Invoke(CurrentLife);
+            }
+
             if (CurrentLife == 0) return;
             
-            CurrentCurrency = Math.Max(CurrentCurrency - _currencyToLoseOnObstacleHit, 0);
-            OnCurrentCurrencyChanged?.Invoke(CurrentCurrency);
+            if (HasNet)
+            {
+                HasNet = false;
+                OnBoughtItemsChanged?.Invoke();
+            }
+            else
+            {
+                CurrentCurrency = Math.Max(CurrentCurrency - _currencyToLoseOnObstacleHit, 0);
+                OnCurrentCurrencyChanged?.Invoke(CurrentCurrency);
+            }
         }
     }
 }
