@@ -21,7 +21,7 @@ namespace Game.Shop
 
         public void UpdateCurrencyText(int currency)
         {
-            _currencyText.text = currency.ToString();
+            _currencyText.text = currency.ToString("N0");
         }
     }
 }
