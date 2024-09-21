@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game.Shop
 {
@@ -8,6 +9,8 @@ namespace Game.Shop
         [SerializeField] private TMP_Text _nameText;
         [SerializeField] private TMP_Text _descText;
         [SerializeField] private TMP_Text _priceText;
+        [SerializeField] private Button _buyButton;
+        [SerializeField] private TMP_Text _confirmText;
 
         private ShopItem _shopItem;
         private ShopManager _shopManager;
@@ -25,7 +28,17 @@ namespace Game.Shop
             _nameText.text = _shopItem.Data.Name;
             _descText.text = _shopItem.Data.Description;
             _priceText.text = _shopItem.Data.Price.ToString();
-    
+
+            if(CurrentRunDataHandler.CurrentCurrency >= _shopItem.Data.Price )
+            {
+                _buyButton.interactable = true;
+                _confirmText.color = Color.white;
+            }
+            else
+            {
+                _buyButton.interactable = false;
+                _confirmText.color = Color.gray;
+            }
             gameObject.SetActive(true);
         }
 

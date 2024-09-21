@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Image = UnityEngine.UI.Image;
 
 namespace Game.Ice_Picking
 {
@@ -22,7 +24,7 @@ namespace Game.Ice_Picking
         [SerializeField] private IcePickingPlayer _player;
         [SerializeField] private IceBlockPool _iceBlockPool;
         [SerializeField] private Image _timerFillImage;
-
+        [SerializeField] private ParticleSystem _iceChopParticles;
 
         [Header("Settings")]
         [SerializeField] private Sides _startingSide;
@@ -115,6 +117,9 @@ namespace Game.Ice_Picking
             {
                 Defense--;
                 OnPlayerGotHit?.Invoke(_icePillarQueue.Peek(), false);
+
+                if (Defense == 0)
+                    CurrentRunDataHandler.HasHelmet = false;
             }
             else
             {
@@ -152,6 +157,9 @@ namespace Game.Ice_Picking
 
             // Dequeue and disable the block chopped.
             IceBlock blockChopped = _icePillarQueue.Dequeue();
+            float angle = _player.CurrentSide == Sides.Left ? 180f : 0f;
+            Instantiate(_iceChopParticles, blockChopped.transform.position, Quaternion.Euler(0,0,angle));
+
             blockChopped.gameObject.SetActive(false);
 
 

@@ -48,7 +48,6 @@ namespace Game.Shop
         }
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (!_isPurchasable) return;
             _shopManager.OpenCheckout(this);
         }
 

@@ -37,7 +37,7 @@ namespace Game
 
         public static void Init()
         {
-            CurrentCurrency = 0;
+            CurrentCurrency = 1000;
             TotalCurrencyInRun = 0;
             CurrentLife = _initialLife;
             DistanceTraveled = 0;
