@@ -8,12 +8,11 @@ namespace Game.Water_Area
     {
         [SerializeField] private WaterAreaCharacterController waterAreaCharacterController;
         [FormerlySerializedAs("islandPrefab")] [SerializeField] private IceChoppingIsland iceChoppingIslandPrefab;
+        [SerializeField] private ShopIsland shopIslandPrefab;
         [SerializeField] private float yPositionToStop = 4f;
         [SerializeField] private float islandSpeed = 1f;
-
-        private IceChoppingIsland _instantiatedIsland;
         
-        public static event Action<IceChoppingIsland> OnIceChoppingIslandStopped;
+        public static event Action<WaterAreaStopIsland> OnIslandReachedDestination;
 
         private void Awake()
         {
@@ -25,19 +24,23 @@ namespace Game.Water_Area
             WaterAreaStopIsland.OnIslandStopped -= OnIslandStopped;
         }
 
-        public void SpawnIsland()
+        public void SpawnIceChoppingIsland()
         {
             var laneToSpawn = waterAreaCharacterController.GetRandomEdgeLane();
-            _instantiatedIsland = Instantiate(iceChoppingIslandPrefab, laneToSpawn.GetObstacleSpawnPosition(), Quaternion.identity);
-            _instantiatedIsland.Init(islandSpeed, yPositionToStop);
+            var island = Instantiate(iceChoppingIslandPrefab, laneToSpawn.GetObstacleSpawnPosition(), Quaternion.identity);
+            island.Init(islandSpeed, yPositionToStop);
+        }
+        
+        public void SpawnShopIsland()
+        {
+            var laneToSpawn = waterAreaCharacterController.GetRandomEdgeLane();
+            var island = Instantiate(shopIslandPrefab, laneToSpawn.GetObstacleSpawnPosition(), Quaternion.identity);
+            island.Init(islandSpeed, yPositionToStop);
         }
         
         private void OnIslandStopped(WaterAreaStopIsland island)
         {
-            if (island is IceChoppingIsland choppingIsland)
-            {
-                OnIceChoppingIslandStopped?.Invoke(choppingIsland);
-            }
+            OnIslandReachedDestination?.Invoke(island);
         }
     }
 }

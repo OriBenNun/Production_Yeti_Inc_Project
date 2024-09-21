@@ -7,6 +7,7 @@ namespace Game
         private const int _metaSceneIndex = 0;
         private const int _gameSceneIndex = 1;
         private const int _icePickingSceneIndex = 2;
+        private const int _shopSceneIndex = 3;
 
         public static void LoadGameSceneAsync()
         {
@@ -23,10 +24,14 @@ namespace Game
             LoadSceneAsync(_metaSceneIndex);
         }
         
+        public static void LoadShopSceneAsync()
+        {
+            LoadSceneAsync(_shopSceneIndex);
+        }
+        
         private static void LoadSceneAsync(int index)
         {
             SceneManager.LoadSceneAsync(index);
         }
-
     }
 }
