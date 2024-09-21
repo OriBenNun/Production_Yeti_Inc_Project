@@ -136,8 +136,8 @@ TextureImporter:
         y: 0
         width: 208
         height: 184
-      alignment: 9
-      pivot: {x: 0.31, y: 0.5}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -158,8 +158,8 @@ TextureImporter:
         y: 0
         width: 208
         height: 184
-      alignment: 9
-      pivot: {x: 0.31, y: 0.5}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -168,6 +168,28 @@ TextureImporter:
       bones: []
       spriteID: f80cfbaf4d34ab650800000000000000
       internalID: 6249382014948982927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yeti_Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 0
+        width: 208
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d37c51195fd12d94ba7b9fe7549227cd
+      internalID: 1833713710
       vertices: []
       indices: 
       edges: []
@@ -186,6 +208,7 @@ TextureImporter:
     nameFileIdTable:
       Yeti_Sheet_0: -2599308808873857012
       Yeti_Sheet_1: 6249382014948982927
+      Yeti_Sheet_2: 1833713710
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1061,6 +1061,7 @@ MonoBehaviour:
   _player: {fileID: 1943200119}
   _iceBlockPool: {fileID: 1591065458}
   _timerFillImage: {fileID: 573886072}
+  _iceChopParticles: {fileID: 20913369316185996, guid: cc85c3a422b9a1f4ea5e3304224637bb, type: 3}
   _startingSide: 1
   _pillarBasePoint: {fileID: 1591065459}
   _blockHeight: 1
@@ -1649,8 +1650,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 704dfbb99b85fbd4e9930ee8b681a98e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defense: 1
   _manager: {fileID: 943387219}
+  _ui: {fileID: 121308188}
 --- !u!1 &1789451407
 GameObject:
   m_ObjectHideFlags: 0

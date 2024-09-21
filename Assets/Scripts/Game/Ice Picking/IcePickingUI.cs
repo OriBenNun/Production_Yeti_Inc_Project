@@ -20,7 +20,6 @@ namespace Game.Ice_Picking
             _iceCounter.text = string.Empty;
             _tapPrompt.gameObject.SetActive(true);
 
-            _helmetImage.gameObject.SetActive(_manager.Defense > 0);
         }
 
         private void OnDisable()
@@ -28,6 +27,11 @@ namespace Game.Ice_Picking
             _manager.OnChop -= UpdateOnChop;
             _manager.OnPlayerStart -= OnFirstInput;
             _manager.OnPlayerGotHit -= OnGotHit;
+        }
+
+        public void Init()
+        {
+            _helmetImage.gameObject.SetActive(_manager.Defense > 0);
         }
 
         private void UpdateOnChop()
