@@ -749,6 +749,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6456734978686653492, guid: 6f4eef53f7c40c5418f6b039b51a8482, type: 3}
+      propertyPath: moveToIslandDestinationShift
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7008139517876468164, guid: 6f4eef53f7c40c5418f6b039b51a8482, type: 3}
       propertyPath: m_Name
       value: Water_Player
@@ -823,6 +827,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waterAreaCharacterController: {fileID: 1095114999}
   iceChoppingIslandPrefab: {fileID: 5880338362348778301, guid: 97dc01bb554a36b43a5b51d419ebef18, type: 3}
+  shopIslandPrefab: {fileID: 6029561585590976726, guid: 377f577b3f3f64f4b9662990ea691178, type: 3}
   yPositionToStop: 1
   islandSpeed: 2
 --- !u!1 &321886650
@@ -3190,15 +3195,14 @@ MonoBehaviour:
   pauseCanvas: {fileID: 1718481203}
   obstaclesManager: {fileID: 79191390}
   stopIslandsManager: {fileID: 294660652}
-  timeUntilObstaclesStop: 15
-  timeBetweenObstaclesStopAndChoppingIslandSpawn: 0.3
+  timeUntilObstaclesStopAndIslandSpawn: 7
+  timeBetweenObstaclesStopAndIslandSpawn: 0.3
   initialObstacleSpeed: 2.6
   initialSpawnCooldown: 1.4
   minimumSpawnCooldown: 0.4
   initialDistancePerSecond: 1
   distancePerSecondMultiplierPerIceChoppingIslandStop: 0.5
   obstacleSpeedMultiplierPerIceChoppingIslandStop: 0.5
-  timeBetweenMultiplierPerIceChoppingIslandStop: 0.5
   spawnCooldownMultiplierPerIceChoppingIslandStop: 0.1
   waterAreaCharacterController: {fileID: 1095114999}
   waterPlayer: {fileID: 244422682}
