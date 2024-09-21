@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 89b330a4732a0b841805ed535459962b
+guid: ed1e9de7b3e4b8140a7b1be56fc97375
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5365774859011345197
-    second: shop stop_0
+      213: 3673316721572746726
+    second: ui wood pressed_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: shop stop_0
+      name: ui wood pressed_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 149
-        height: 158
+        width: 632
+        height: 360
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d2bc7102ecf077a40800000000000000
-      internalID: 5365774859011345197
+      spriteID: 6e598d0a81e3af230800000000000000
+      internalID: 3673316721572746726
       vertices: []
       indices: 
       edges: []
@@ -145,8 +145,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      shop stop_0: 5365774859011345197
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
