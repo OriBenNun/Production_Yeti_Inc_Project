@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using Game.Shop;
+using System.Globalization;
 using Game.Water_Area.Obstacles;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -159,8 +159,85 @@ namespace Game.Water_Area
         {
             Time.timeScale = 0;
             gameOverCanvas.gameObject.SetActive(true);
+            
+            SaveCurrentRunData();
         }
-        
+
+        private void SaveCurrentRunData()
+        {
+            var cubesCollected = CurrentRunDataHandler.TotalCurrencyInRun;
+
+            if (!PlayerPrefs.HasKey("FirstCubes"))
+            {
+                PlayerPrefs.SetString("FirstDate", DateTime.Today.ToString("dd/MM/yyyy"));
+                PlayerPrefs.SetInt("FirstCubes", cubesCollected);
+                PlayerPrefs.SetInt("FirstDistance", CurrentRunDataHandler.DistanceTraveled);
+            }
+            else if (cubesCollected > PlayerPrefs.GetInt("FirstCubes"))
+            {
+                if (PlayerPrefs.HasKey("SecondCubes"))
+                {
+                    if (PlayerPrefs.HasKey("ThirdCubes"))
+                    {
+                        PlayerPrefs.SetString("ThirdDate", PlayerPrefs.GetString("SecondDate"));
+                        PlayerPrefs.SetInt("ThirdCubes", PlayerPrefs.GetInt("SecondCubes"));
+                        PlayerPrefs.SetInt("ThirdDistance", PlayerPrefs.GetInt("SecondDistance"));
+                    }
+                    
+                    PlayerPrefs.SetString("SecondDate", PlayerPrefs.GetString("FirstDate"));
+                    PlayerPrefs.SetInt("SecondCubes", PlayerPrefs.GetInt("FirstCubes"));
+                    PlayerPrefs.SetInt("SecondDistance", PlayerPrefs.GetInt("FirstDistance"));
+                    
+                    PlayerPrefs.SetString("FirstDate", DateTime.Today.ToString("dd/MM/yyyy"));
+                    PlayerPrefs.SetInt("FirstCubes", cubesCollected);
+                    PlayerPrefs.SetInt("FirstDistance", CurrentRunDataHandler.DistanceTraveled);
+                }
+                else if (!PlayerPrefs.HasKey("SecondCubes"))
+                {
+                    PlayerPrefs.SetString("SecondDate", PlayerPrefs.GetString("FirstDate"));
+                    PlayerPrefs.SetInt("SecondCubes", PlayerPrefs.GetInt("FirstCubes"));
+                    PlayerPrefs.SetInt("SecondDistance", PlayerPrefs.GetInt("FirstDistance"));
+                    
+                    PlayerPrefs.SetString("FirstDate", DateTime.Today.ToString("dd/MM/yyyy"));
+                    PlayerPrefs.SetInt("FirstCubes", cubesCollected);
+                    PlayerPrefs.SetInt("FirstDistance", CurrentRunDataHandler.DistanceTraveled);
+                }
+                else if (cubesCollected > PlayerPrefs.GetInt("SecondCubes"))
+                {
+                    if (!PlayerPrefs.HasKey("ThirdCubes"))
+                    {
+                        PlayerPrefs.SetString("ThirdDate", PlayerPrefs.GetString("SecondDate"));
+                        PlayerPrefs.SetInt("ThirdCubes", PlayerPrefs.GetInt("SecondCubes"));
+                        PlayerPrefs.SetInt("ThirdDistance", PlayerPrefs.GetInt("SecondDistance"));
+                        
+                        PlayerPrefs.SetString("SecondDate", DateTime.Today.ToString("dd/MM/yyyy"));
+                        PlayerPrefs.SetInt("SecondCubes", cubesCollected);
+                        PlayerPrefs.SetInt("SecondDistance", CurrentRunDataHandler.DistanceTraveled);
+                    }
+                    else if (cubesCollected > PlayerPrefs.GetInt("ThirdCubes"))
+                    {
+                        PlayerPrefs.SetString("ThirdDate", DateTime.Today.ToString("dd/MM/yyyy"));
+                        PlayerPrefs.SetInt("ThirdCubes", cubesCollected);
+                        PlayerPrefs.SetInt("ThirdDistance", CurrentRunDataHandler.DistanceTraveled);
+                    }
+                }
+                else if (!PlayerPrefs.HasKey("ThirdCubes"))
+                {
+                    PlayerPrefs.SetString("ThirdDate", DateTime.Today.ToString("dd/MM/yyyy"));
+                    PlayerPrefs.SetInt("ThirdCubes", cubesCollected);
+                    PlayerPrefs.SetInt("ThirdDistance", CurrentRunDataHandler.DistanceTraveled);
+                }
+            }
+            else if (!PlayerPrefs.HasKey("SecondCubes"))
+            {
+                PlayerPrefs.SetString("SecondDate", DateTime.Today.ToString("dd/MM/yyyy"));
+                PlayerPrefs.SetInt("SecondCubes", cubesCollected);
+                PlayerPrefs.SetInt("SecondDistance", CurrentRunDataHandler.DistanceTraveled);
+            }
+            
+            PlayerPrefs.Save();
+        }
+
         private void HandleOnPlayerReachedIsland(WaterAreaStopIsland island)
         {
             if (island is IceChoppingIsland)

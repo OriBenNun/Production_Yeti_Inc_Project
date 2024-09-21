@@ -27,9 +27,9 @@ namespace Game.Water_Area
 
         private void UpdateVisuals()
         {
-            netImage.enabled = CurrentRunDataHandler.HasNet;
-            ramImage.enabled = CurrentRunDataHandler.HasRam;
-            helmetImage.enabled = CurrentRunDataHandler.HasHelmet;
+            netImage.gameObject.SetActive(CurrentRunDataHandler.HasNet);
+            ramImage.gameObject.SetActive(CurrentRunDataHandler.HasRam);
+            helmetImage.gameObject.SetActive(CurrentRunDataHandler.HasHelmet);
         }
     }
 }
