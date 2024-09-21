@@ -12,6 +12,7 @@ namespace Game
         public static event Action OnBoughtItemsChanged;
 
         public static int CurrentCurrency { get; set; }
+        public static int TotalCurrencyInRun { get; set; }
 
         private static int _currentLife;
 
@@ -31,13 +32,13 @@ namespace Game
 
         public static bool HasInitialized { get; private set; }
 
-        private const int _initialCurrency = 0;
         private const int _initialLife = 4;
         private const int _currencyToLoseOnObstacleHit = 20;
 
         public static void Init()
         {
-            CurrentCurrency = _initialCurrency;
+            CurrentCurrency = 0;
+            TotalCurrencyInRun = 0;
             CurrentLife = _initialLife;
             DistanceTraveled = 0;
             CurrentRunTime = 0;
@@ -64,6 +65,7 @@ namespace Game
 
         private static void HandleOnIcePickingComplete(int iceCubes)
         {
+            TotalCurrencyInRun += iceCubes;
             CurrentCurrency += iceCubes;
             OnCurrentCurrencyChanged?.Invoke(CurrentCurrency);
         }
