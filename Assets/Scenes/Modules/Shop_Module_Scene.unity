@@ -1656,6 +1656,7 @@ MonoBehaviour:
   _descText: {fileID: 473826329}
   _priceText: {fileID: 288509618}
   _buyButton: {fileID: 1144985858}
+  _confirmText: {fileID: 1199276186}
 --- !u!114 &1405976744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1953,7 +1954,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2043583942}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2102711327}
+        m_TargetAssemblyTypeName: Game.Shop.ShopManager, Assembly-CSharp
+        m_MethodName: ExitShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2043583942
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,8 +14,6 @@ namespace Game.Shop
 
         private void Awake()
         {
-            
-
             _checkoutWindow.Init(this);
             foreach (ShopItem item in _items)
             {
@@ -39,6 +37,11 @@ namespace Game.Shop
             {
                 item.UpdateState();
             }
+        }
+
+        public void ExitShop()
+        {
+            SceneTransitionHandler.LoadGameSceneAsync();
         }
     }
 }
