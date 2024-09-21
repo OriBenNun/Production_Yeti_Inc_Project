@@ -12,12 +12,12 @@ namespace Game.Water_Area
         
         private void OnEnable()
         {
-            distanceText.text = $"Distance: {CurrentRunDataHandler.DistanceTraveled}m";
+            distanceText.text = $"Distance: {CurrentRunDataHandler.DistanceTraveled:N0}m";
             
             var timeInMinutes = CurrentRunDataHandler.CurrentRunTime / 60;
             timeText.text = $"Time Played: {timeInMinutes:F1} min(s)";
             
-            iceCubesText.text = $"Ice Cubes Collected: {CurrentRunDataHandler.CurrentCurrency}";
+            iceCubesText.text = $"Total Ice Collected: {CurrentRunDataHandler.TotalCurrencyInRun:N0}";
         }
     }
 }
