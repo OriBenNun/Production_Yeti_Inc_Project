@@ -117,6 +117,9 @@ namespace Game.Ice_Picking
             {
                 Defense--;
                 OnPlayerGotHit?.Invoke(_icePillarQueue.Peek(), false);
+
+                if (Defense == 0)
+                    CurrentRunDataHandler.HasHelmet = false;
             }
             else
             {
