@@ -14,15 +14,14 @@ namespace Game.Water_Area
 
         [SerializeField] private ObstaclesManager obstaclesManager;
         [FormerlySerializedAs("iceChoppingIslandsManager")] [SerializeField] private StopIslandsManager stopIslandsManager;
-        [SerializeField] private float timeUntilObstaclesStop = 5f;
-        [SerializeField] private float timeBetweenObstaclesStopAndChoppingIslandSpawn = 1f;
+        [SerializeField] private float timeUntilObstaclesStopAndIslandSpawn = 30f;
+        [FormerlySerializedAs("timeBetweenObstaclesStopAndChoppingIslandSpawn")] [SerializeField] private float timeBetweenObstaclesStopAndIslandSpawn = 1f;
         [SerializeField] private float initialObstacleSpeed = 2.6f;
         [SerializeField] private float initialSpawnCooldown = 1.4f;
         [SerializeField] private float minimumSpawnCooldown = 0.4f;
         [SerializeField] private int initialDistancePerSecond = 71;
         [SerializeField] private float distancePerSecondMultiplierPerIceChoppingIslandStop = 0.5f;
         [SerializeField] private float obstacleSpeedMultiplierPerIceChoppingIslandStop = 0.5f;
-        [SerializeField] private float timeBetweenMultiplierPerIceChoppingIslandStop = 0.5f;
         [SerializeField] private float spawnCooldownMultiplierPerIceChoppingIslandStop = 0.2f;
 
         [SerializeField] private WaterAreaCharacterController waterAreaCharacterController;
@@ -31,7 +30,9 @@ namespace Game.Water_Area
         public static event Action OnGameQuited;
         // private float _timeFromStart;
         
-        private static int _iceChoppingIslandStops = 0;
+        private static int _islandStops;
+
+        private static bool _isPreviousIslandIceChopping;
         
         private void Awake()
         {
@@ -45,7 +46,7 @@ namespace Game.Water_Area
             
             WaterPlayer.OnPlayerDied += WaterPlayerOnPlayerDied;
             WaterPlayer.OnPlayerReachedIsland += HandleOnPlayerReachedIsland;
-            StopIslandsManager.OnIceChoppingIslandStopped += HandleOnIceChoppingIslandStopped;
+            StopIslandsManager.OnIslandReachedDestination += HandleOnIslandReachedDestination;
             
             OnGameQuited += CurrentRunDataHandler.Reset;
         }
@@ -60,7 +61,7 @@ namespace Game.Water_Area
             if (Time.timeScale == 0) { return; }
             
             CurrentRunDataHandler.DistanceTraveled += initialDistancePerSecond +
-                                Mathf.CeilToInt(_iceChoppingIslandStops * distancePerSecondMultiplierPerIceChoppingIslandStop * Time.deltaTime);
+                                Mathf.CeilToInt(_islandStops * distancePerSecondMultiplierPerIceChoppingIslandStop * Time.deltaTime);
         }
 
         private void OnDestroy()
@@ -68,7 +69,7 @@ namespace Game.Water_Area
             Time.timeScale = 1.0f;
             WaterPlayer.OnPlayerDied -= WaterPlayerOnPlayerDied;
             WaterPlayer.OnPlayerReachedIsland -= HandleOnPlayerReachedIsland;
-            StopIslandsManager.OnIceChoppingIslandStopped -= HandleOnIceChoppingIslandStopped;
+            StopIslandsManager.OnIslandReachedDestination -= HandleOnIslandReachedDestination;
             
             OnGameQuited -= CurrentRunDataHandler.Reset;
         }
@@ -76,7 +77,8 @@ namespace Game.Water_Area
         public void ReloadGameScene()
         {
             Time.timeScale = 1.0f;
-            _iceChoppingIslandStops = 0;
+            _islandStops = 0;
+            _isPreviousIslandIceChopping = false;
             OnGameQuited?.Invoke();
             SceneTransitionHandler.LoadGameSceneAsync();
         }
@@ -84,7 +86,8 @@ namespace Game.Water_Area
         public void LoadMetaScene()
         {
             Time.timeScale = 1.0f;
-            _iceChoppingIslandStops = 0;
+            _islandStops = 0;
+            _isPreviousIslandIceChopping = false;
             OnGameQuited?.Invoke();
             SceneTransitionHandler.LoadMetaSceneAsync();
         }
@@ -103,26 +106,38 @@ namespace Game.Water_Area
         
         private IEnumerator StartGameSequence()
         {
-            var speed = initialObstacleSpeed + _iceChoppingIslandStops * obstacleSpeedMultiplierPerIceChoppingIslandStop;
-            var spawnCooldown = Mathf.Max(minimumSpawnCooldown,initialSpawnCooldown - _iceChoppingIslandStops * spawnCooldownMultiplierPerIceChoppingIslandStop);
+            var speed = initialObstacleSpeed + _islandStops * obstacleSpeedMultiplierPerIceChoppingIslandStop;
+            var spawnCooldown = Mathf.Max(minimumSpawnCooldown,initialSpawnCooldown - _islandStops * spawnCooldownMultiplierPerIceChoppingIslandStop);
             obstaclesManager.StartSpawning(spawnCooldown, speed);
 
-            var timeToWait = timeUntilObstaclesStop + _iceChoppingIslandStops * timeBetweenMultiplierPerIceChoppingIslandStop;
-            yield return new WaitForSeconds(timeToWait);
+            yield return new WaitForSeconds(timeUntilObstaclesStopAndIslandSpawn);
             
             obstaclesManager.StopSpawning();
             
-            yield return new WaitForSeconds(timeBetweenObstaclesStopAndChoppingIslandSpawn);
+            yield return new WaitForSeconds(timeBetweenObstaclesStopAndIslandSpawn);
             
-            stopIslandsManager.SpawnIsland();
-        }
-        
-        private void HandleOnIceChoppingIslandStopped(IceChoppingIsland island)
-        {
-            StartMovePlayerToStoppedIsland(island);
+            SpawnIsland();
         }
 
-        private void StartMovePlayerToStoppedIsland(IceChoppingIsland island)
+        private void SpawnIsland()
+        {
+            if (_isPreviousIslandIceChopping)
+            {
+                stopIslandsManager.SpawnShopIsland();
+                _isPreviousIslandIceChopping = false;
+                return;
+            }
+            
+            stopIslandsManager.SpawnIceChoppingIsland();
+            _isPreviousIslandIceChopping = true;
+        }
+
+        private void HandleOnIslandReachedDestination(WaterAreaStopIsland waterAreaStopIsland)
+        {
+            StartMovePlayerToStoppedIsland(waterAreaStopIsland);
+        }
+
+        private void StartMovePlayerToStoppedIsland(WaterAreaStopIsland island)
         {
             DisableControls();
             waterPlayer.StartMoveToIsland(island);
@@ -136,7 +151,7 @@ namespace Game.Water_Area
         private void LoadIcePickingScene()
         {
             Time.timeScale = 1.0f;
-            _iceChoppingIslandStops++;
+            _islandStops++;
             SceneTransitionHandler.LoadIcePickingSceneAsync();
         }
 
@@ -153,7 +168,18 @@ namespace Game.Water_Area
                 // TODO add yeti animation
                 LoadIcePickingScene();
             }
+            else if (island is ShopIsland)
+            {
+                // TODO add yeti animation
+                LoadShopScene();
+            }
         }
-        
+
+        private void LoadShopScene()
+        {
+            Time.timeScale = 1.0f;
+            _islandStops++;
+            SceneTransitionHandler.LoadShopSceneAsync();
+        }
     }
 }
