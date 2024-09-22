@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 473de42c710efe84880dfe6ae7dba0b2
+guid: ac258b9c865510b44bc7c13c740ff3e1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5438685461540599578
-    second: ui shop texture 2_0
+      213: -2814052773951892046
+    second: base final_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -48,11 +48,11 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
-  spriteBorder: {x: 40, y: 40, z: 40, w: 40}
+  spritePixelsToUnits: 106
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ui shop texture 2_0
+      name: base final_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1164
-        height: 1164
+        width: 170
+        height: 47
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a177534ac971a7b40800000000000000
-      internalID: 5438685461540599578
+      spriteID: 2b5156d59e972f8d0800000000000000
+      internalID: -2814052773951892046
       vertices: []
       indices: 
       edges: []
@@ -139,14 +139,14 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ui shop texture 2_0: 5438685461540599578
+      base final_0: -2814052773951892046
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
