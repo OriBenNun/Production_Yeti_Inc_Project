@@ -48,7 +48,7 @@ namespace Game.Water_Area
             WaterPlayer.OnPlayerReachedIsland += HandleOnPlayerReachedIsland;
             StopIslandsManager.OnIslandReachedDestination += HandleOnIslandReachedDestination;
             
-            OnGameQuited += CurrentRunDataHandler.Reset;
+            OnGameQuited += HandleOnGameQuited;
         }
 
         private void Start()
@@ -71,7 +71,7 @@ namespace Game.Water_Area
             WaterPlayer.OnPlayerReachedIsland -= HandleOnPlayerReachedIsland;
             StopIslandsManager.OnIslandReachedDestination -= HandleOnIslandReachedDestination;
             
-            OnGameQuited -= CurrentRunDataHandler.Reset;
+            OnGameQuited -= HandleOnGameQuited;
         }
 
         public void ReloadGameScene()
@@ -159,8 +159,6 @@ namespace Game.Water_Area
         {
             Time.timeScale = 0;
             gameOverCanvas.gameObject.SetActive(true);
-            
-            SaveCurrentRunData();
         }
 
         private void SaveCurrentRunData()
@@ -257,6 +255,12 @@ namespace Game.Water_Area
             Time.timeScale = 1.0f;
             _islandStops++;
             SceneTransitionHandler.LoadShopSceneAsync();
+        }
+        
+        private void HandleOnGameQuited()
+        {
+            SaveCurrentRunData();
+            CurrentRunDataHandler.Reset();
         }
     }
 }

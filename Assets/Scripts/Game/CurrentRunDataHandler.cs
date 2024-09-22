@@ -62,6 +62,13 @@ namespace Game
             IcePickingCompletionManager.OnIcePickingComplete -= HandleOnIcePickingComplete;
             WaterPlayer.OnPlayerGotHit -= HandleOnPlayerGotHit;
         }
+        
+        public static void AddIceCube()
+        {
+            TotalCurrencyInRun++;
+            CurrentCurrency++;
+            OnCurrentCurrencyChanged?.Invoke(CurrentCurrency);
+        }
 
         private static void HandleOnIcePickingComplete(int iceCubes)
         {
