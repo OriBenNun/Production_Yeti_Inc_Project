@@ -1068,9 +1068,11 @@ MonoBehaviour:
   _maxSpaceBetweenSpikes: 3
   _maxSpikesBeforeSwitch: 3
   _firstSpikeHeight: 4
-  _maxTime: 10
-  _percentTimeRecovered: 5
+  _maxTime: 7
   _gracePeriodDuration: 0.1
+  _percentTimeRecovered: 5
+  _reducedPer10Chopped: 0.2
+  _lowerBoundRecovery: 1
 --- !u!1 &966157955
 GameObject:
   m_ObjectHideFlags: 0

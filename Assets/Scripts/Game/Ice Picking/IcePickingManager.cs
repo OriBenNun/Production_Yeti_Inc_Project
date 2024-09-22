@@ -38,8 +38,10 @@ namespace Game.Ice_Picking
 
         [Header("Timer Settings")]
         [SerializeField] private float _maxTime;
-        [SerializeField] private float _percentTimeRecovered;
         [SerializeField] private float _gracePeriodDuration;
+        [SerializeField] private float _percentTimeRecovered;
+        [SerializeField] private float _reducedPer10Chopped;
+        [SerializeField] private float _lowerBoundRecovery;
 
         private System.Random _random;
         private int _blocksSinceLastSpike;
@@ -102,7 +104,8 @@ namespace Game.Ice_Picking
        
             // Timer Handling
             _isGraceTime = true;
-            _timer += _maxTime * (_percentTimeRecovered / 100f);
+            float recoveredTime = Mathf.Clamp(_percentTimeRecovered - (_reducedPer10Chopped / 10 * IceChopped), _lowerBoundRecovery, _percentTimeRecovered);
+            _timer += _maxTime * (recoveredTime / 100f);
             if( _timer  > _maxTime )
                 _timer = _maxTime;
 
