@@ -104,7 +104,7 @@ namespace Game.Ice_Picking
        
             // Timer Handling
             _isGraceTime = true;
-            float recoveredTime = Mathf.Clamp(_percentTimeRecovered - (_reducedPer10Chopped * IceChopped), _lowerBoundRecovery, _percentTimeRecovered);
+            float recoveredTime = Mathf.Clamp(_percentTimeRecovered - (_reducedPer10Chopped / 10 * IceChopped), _lowerBoundRecovery, _percentTimeRecovered);
             _timer += _maxTime * (recoveredTime / 100f);
             if( _timer  > _maxTime )
                 _timer = _maxTime;
