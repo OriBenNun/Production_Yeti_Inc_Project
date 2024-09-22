@@ -22,16 +22,23 @@ namespace Game.Water_Area
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (!other.TryGetComponent(out Obstacle obstacle)) return;
-            
-            obstacle.Disable();
-            OnPlayerGotHit?.Invoke();
-            gotHitFeedback?.PlayFeedbacks();
+            if (other.TryGetComponent(out Obstacle obstacle))
+            {
+                obstacle.Disable();
+                OnPlayerGotHit?.Invoke();
+                gotHitFeedback?.PlayFeedbacks();
 
-            if (CurrentRunDataHandler.CurrentLife > 0) return;
+                if (CurrentRunDataHandler.CurrentLife > 0) return;
             
-            gameObject.SetActive(false);
-            OnPlayerDied?.Invoke();
+                gameObject.SetActive(false);
+                OnPlayerDied?.Invoke();
+            }
+
+            if (other.TryGetComponent(out CollectibleIceCube iceCube))
+            {
+                iceCube.gameObject.SetActive(false);
+                CurrentRunDataHandler.AddIceCube();
+            }
         }
 
         public void MoveToLane(LaneManager currentLane)

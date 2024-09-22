@@ -11,6 +11,7 @@ namespace Game.Water_Area.Obstacles
         [SerializeField] private int initialPoolSize = 50;
         [SerializeField] private WaterAreaCharacterController waterAreaCharacterController;
         [SerializeField] private int maxObstaclesInLane = 3;
+        [SerializeField] private IceCubesCollectiblesManager iceCubesCollectiblesManager;
         
         private List<Sprite> _obstacleSprites;
 
@@ -96,6 +97,13 @@ namespace Game.Water_Area.Obstacles
 
                 _previousLanePosition = lane.GetLanePositionType();
                 SpawnNewObstacle(lane, speed);
+                
+                var chanceToSpawnIceCubes = Random.Range(0, 100);
+                
+                if (chanceToSpawnIceCubes <= IceCubesCollectiblesManager.ChanceToSpawnIceCube)
+                {
+                    iceCubesCollectiblesManager.SpawnIceCube(speed);
+                }
             }
         }
     }

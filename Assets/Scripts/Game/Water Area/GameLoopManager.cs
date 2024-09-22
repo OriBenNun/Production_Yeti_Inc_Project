@@ -71,7 +71,7 @@ namespace Game.Water_Area
             WaterPlayer.OnPlayerReachedIsland -= HandleOnPlayerReachedIsland;
             StopIslandsManager.OnIslandReachedDestination -= HandleOnIslandReachedDestination;
             
-            OnGameQuited -= CurrentRunDataHandler.Reset;
+            OnGameQuited -= HandleOnGameQuited;
         }
 
         public void ReloadGameScene()

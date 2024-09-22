@@ -1588,6 +1588,7 @@ MonoBehaviour:
   initialPoolSize: 50
   waterAreaCharacterController: {fileID: 1095114999}
   maxObstaclesInLane: 3
+  iceCubesCollectiblesManager: {fileID: 1763027014}
 --- !u!1 &628079817
 GameObject:
   m_ObjectHideFlags: 0
@@ -4889,6 +4890,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1721012467}
   m_CullTransparentMesh: 1
+--- !u!1 &1763027013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1763027015}
+  - component: {fileID: 1763027014}
+  m_Layer: 0
+  m_Name: IceCubesCollectiblesManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1763027014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763027013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f04e493be6e21d44f84b94e2c8b3e596, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iceCubePrefab: {fileID: 8789911632459901488, guid: 2e1b495bb913ac148bf59e1e29eb8a25, type: 3}
+  waterAreaCharacterController: {fileID: 1095114999}
+  timeBetweenObstacleAndIceCubeSpawn: 0.6
+--- !u!4 &1763027015
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763027013}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1771241929
 GameObject:
   m_ObjectHideFlags: 0
@@ -5675,3 +5723,4 @@ SceneRoots:
   - {fileID: 294660651}
   - {fileID: 1536214679}
   - {fileID: 534199955}
+  - {fileID: 1763027015}
